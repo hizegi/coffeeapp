@@ -50,6 +50,13 @@ app.get('/', function(req, res){
 	res.send("HEYYYYY THE BEGINNING OF SOMETHING SPECIAL!")
 })
 
+var locationsController = require('./controllers/locations.js');
+var usersController     = require('./controllers/users.js');
+
+app.use('/locations', locationsController);
+app.use('/users', usersController);
+
+
 //========================
 // LISTENERS
 //========================
