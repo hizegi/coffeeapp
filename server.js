@@ -11,6 +11,7 @@ var passport       = require('passport');
 var session        = require('express-session');
 var cookieParser   = require('cookie-parser');
 var morgan         = require('morgan');
+// var Yelp 		   = require('yelp');
     //require config
     // require('./config/passport.js')(passport)
 
@@ -43,6 +44,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //========================
+// YELP
+//========================
+
+
+// var yelp = new Yelp({
+//   consumer_key: 'Qd0zXw0AHk_My8Jxwom2Kg',
+//   consumer_secret: 'JRXvORk6MN0H-e9XRseHdwecNIg',
+//   token: 'yTWo_vSSCvhzhpdEBE8unE3WW34aI48i',
+//   token_secret: '4wsJMCDo-88GzPwjkZR1UpXBfpQ'
+// });
+
+
+//========================
 // CONTROLLERS 
 //========================
 
@@ -52,9 +66,11 @@ app.get('/', function(req, res){
 
 var locationsController = require('./controllers/locations.js');
 var usersController     = require('./controllers/users.js');
+var reviewsController   = require('./controllers/reviews.js')
 
 app.use('/locations', locationsController);
 app.use('/users', usersController);
+app.use('/test', reviewsController)
 
 
 //========================

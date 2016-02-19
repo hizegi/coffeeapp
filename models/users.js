@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
-var Local = require('./models/locations').Schema;
+var Local = require('./models/locations');
 var bcrypt = require('bcrypt-nodejs');
+
+///STILL NEED TO REFERENCE LOCAL SCHEMA IN LINE 11
 
 var userSchema = new mongoose.Schema({
 	username: {type: String, required: true, unique: true},
