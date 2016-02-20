@@ -6,6 +6,18 @@
 <body>
 Hi WORLD this is the locations index!!!
 
+<p>checks to see if usertrue: <%=usertrue%></p>
+
+					<% if (usertrue)  { %>
+						<p>add a new review</p>
+						<form action="/locations/<%= location.id %>/newlocation" method="POST">
+							<input type="text" name="name" placeholder="name">
+							<input type="text" name="lat" placeholder="latitude">
+							<input type="text" name="lng" placeholder="longitude">
+							<input type="submit">				
+						</form>
+					<% } %>
+
 
 
 

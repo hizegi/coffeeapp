@@ -3,9 +3,26 @@
 	<title>TESTING YELP</title>
 </head>
 <body>
-Hi WORLD this is the USER SHOW PAGE!! 
+Hi WORLD this is the USER SHOW PAGE!! <p>Test to see if user is on: <%= usertrue %></p>
 
+	<h2> This is <%= user.username %>'s Page!</h3>
 
+	<p>Here you can see all reviews posted by <%=user.username%></p>
+
+		<% if (usertrue) { %>
+		<form action="/users/<%= user.id %>" method="POST">
+			<input type="text" name="name" placeholder="name">
+			<input type="text" name="latitude" placeholder="latitude">
+			<input type="text" name="longitude" placeholder="longitude">
+			<input type="submit">				
+		</form>
+	<% } %>
+
+	<ul>
+		<% for (var i = 0; i < user.locations.length; i++) { %>
+		<li>Location <%= i+1 %>: <%= user.locations[i].name%></li>
+		<% } %>
+	</ul>
 
 	<form action="/locations" method="POST">
 		<input type="text" name="zipcode" placeholder="zipcode"><br>

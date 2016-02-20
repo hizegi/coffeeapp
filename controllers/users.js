@@ -4,7 +4,7 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users.js");
-var Locations = require("../models/locations.js")
+var Locations = require("../models/locations.js");
 var mongoose = require("mongoose");
 var passport = require("passport");
 
@@ -28,6 +28,7 @@ router.get('/', function(req, res) {
 //==========================
 
 //this is for logging out
+//goes back to /users main page
 router.get('/logout', function(req, res){
 	req.logout();
 res.redirect('/users')
@@ -40,6 +41,13 @@ router.get('/json', function(req, res){
 		res.send(users)
 	})
 })
+
+// json for specific user, used ajax to display markers on map??
+router.get('/:id/json', function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+		res.send(user);
+	});
+});
 
 //this is for show page ONLY IF logged in
 router.get('/:id', isLoggedIn, function(req, res) {
@@ -84,6 +92,33 @@ router.post('/login', passport.authenticate('local-login', {
 		res.redirect('/users/' + req.user.id)
 });
 
+//this is for posting a new location on user ID
+router.post('/:id/', function(req, res){
+	// console.log(req.params.id + " WAS ACCESSED")
+	// console.log("id: " + req.params.id)
+	//find User by ID
+	User.findById(req.params.id, function(err, user){
+		// console.log(user.username + user.local + " WAS ACCESSED");
+		//find location by hidden id
+
+		var newLocation = new Locations(req.body);
+
+		user.locations.push(newLocation);
+		// console.log(user.local + " WAS ACCESSED");
+
+		newLocation.save(function(err, local){
+
+				user.save(function(err, user){
+
+
+				//redirect back to user show page
+				// res.redirect('users/' + req.params.id);
+				res.redirect('/users/' + req.params.id)
+			})
+
+		})
+	})
+})
 //==========================
 // DELETE
 //==========================

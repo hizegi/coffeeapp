@@ -3,28 +3,47 @@
 	<title>TESTING YELP</title>
 </head>
 <body>
-	<h1>Hi WORLD this is the USERS INDEX!!!!</h1>
+	<h1>Hi WORLD this is the USERS INDEX!!!! Sign up here, check out some main features</h1>
+
+		<!-- SEE IF OTHER USERS SHOW -->
+				<div id="dataset-select-container">
+					<p id="users-title">Users</p>
+					<select id="dataset-select">
+						<option value=""/>-------</option>
+						<% for (var i=0; i < user.length; i ++) { %>
+							<option value="<%= user[i].id %>"><%= user[i].username %></option>
+						<% } %>
+					</select>					
+				</div>
+
 
 	<!-- SHOWS only if user is LOGGED OUT -->
 	<!-- SIGN iN Form -->
-	<h4>New Users: Sign up</h4>
-		<form action="/users" method="POST">
-			<input type="text" name="username" placeholder="username">
-			<input type="text" name="email" placeholder="email">
-			<input type="text" name="password" placeholder="password">
-			<input type="submit">
-		</form>
 
-	<!-- SHOWS only if user is LOGGED OUT -->
-	<!-- 	LOG IN FORM -->
-	<h4>Log In</h4>
-		<form action="/users/login" method="POST">
-			<input type="text" name="email" placeholder="e-mail address">
-			<input type="password" name="password" placeholder="password">
-			<button>Log In</button>
-		</form>
+	<% if(!login) { %> 
 
+		<h4>New Users: Sign up</h4>
+			<form action="/users" method="POST">
+				<input type="text" name="username" placeholder="username">
+				<input type="text" name="email" placeholder="email">
+				<input type="text" name="password" placeholder="password">
+				<input type="submit">
+			</form>
 
+		<!-- SHOWS only if user is LOGGED OUT -->
+		<!-- 	LOG IN FORM -->
+		<h4>Log In</h4>
+			<form action="/users/login" method="POST">
+				<input type="text" name="email" placeholder="e-mail address">
+				<input type="password" name="password" placeholder="password">
+				<button>Log In</button>
+			</form>
+
+	<% }  else { %>
+
+		<a href="/users/logout">LOGOUT</a>
+
+	<% } %>
 
 	<h3>My Reviews</h3>
 
@@ -38,7 +57,6 @@
 		<button>SUBMIT</button>
 	</form>
 
-	<a href="/users/logout">LOGOUT</a>
 
 
 
