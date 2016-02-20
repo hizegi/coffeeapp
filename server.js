@@ -13,7 +13,7 @@ var cookieParser   = require('cookie-parser');
 var morgan         = require('morgan');
 // var Yelp 		   = require('yelp');
     //require config
-    // require('./config/passport.js')(passport)
+    require('./config/passport.js')(passport)
 
 //========================
 // MIDDLEWARES
@@ -60,6 +60,7 @@ app.use(passport.session());
 // CONTROLLERS 
 //========================
 
+//redirect to /users automatically
 app.get('/', function(req, res){
 	res.redirect('/users')
 })
