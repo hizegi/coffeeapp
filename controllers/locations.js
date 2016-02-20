@@ -4,7 +4,10 @@
 //==========================
 var express = require("express");
 var router = express.Router();
-var yelp = require('../models/yelp.js')
+var yelp = require('../models/yelp.js');
+var User = require("../models/users.js");
+var Locations = require("../models/locations.js");
+var Review = require("../models/reviews.js");
 
 
 //==========================
@@ -18,6 +21,9 @@ router.get('/show', function(req, res){
 	res.render("locations/show.ejs")
 })
 
+router.get('/:id', function(req, res){
+	res.send("THis is the show page for the unique location")
+})
 //==========================
 // CREATE
 //==========================
@@ -52,7 +58,33 @@ router.post("/", function(req, res){
 // 	})
 // })
 
+//this is for posting a new location on user ID
+router.post('/:id/newreview', function(req, res){
+	// console.log(req.params.id + " WAS ACCESSED")
+	// console.log("id: " + req.params.id)
+	//find Location by id
+	Locations.findById(req.params.id, function(err, location){
+		// console.log("LOCATIONS WAS ACCESSED");
+		//create new article
+		var newReview = new Review(req.body);
 
+		location.reviews.push(newReview);
+		// console.log(user.local + " WAS ACCESSED");
+
+		newReview.save(function(err, review){
+
+			location.save(function(err, location){
+				user.save(function(err, user){
+
+
+				//redirect back to user show page
+				// res.redirect('users/' + req.params.id);
+				res.redirect('/locations/' + req.params.id)
+				})
+			})
+		})
+	})
+})
 
 	// 	 	{ 
 

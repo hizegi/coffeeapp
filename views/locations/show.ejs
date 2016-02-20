@@ -10,10 +10,10 @@ Hi WORLD this is the locations index!!!
 
 					<% if (usertrue)  { %>
 						<p>add a new review</p>
-						<form action="/locations/<%= location.id %>/newlocation" method="POST">
-							<input type="text" name="name" placeholder="name">
-							<input type="text" name="lat" placeholder="latitude">
-							<input type="text" name="lng" placeholder="longitude">
+						<form action="/locations/<%= location.id %>/newreview" method="POST">
+							<input type="text" name="author" placeholder="name">
+							<input type="text" name="best" placeholder="best donut">
+							<input type="text" name="comments" placeholder="comments">
 							<input type="submit">				
 						</form>
 					<% } %>
