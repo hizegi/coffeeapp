@@ -2,6 +2,7 @@
 <head>
 	<title>TESTING YELP</title>
 	<script type="text/javascript" src="/js/locationsshow.js"></script>
+	<script type="text/javascript" src="src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 </head>
@@ -16,8 +17,10 @@
 
 
 	<% for (var i = 0; i < data.businesses.length; i++) { %>
-	Business <%= i %> is: <%= data.businesses[i].id %><br>
+		Shop number <%= i + 1 %>: <a href="/locations/<%= data.businesses[i].id %>/review"><%= data.businesses[i].name%></a><br>
 	<% } %>
+
+
 
 	<a href="/locations/show.ejs">Click here for show page</a>
 

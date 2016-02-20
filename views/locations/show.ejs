@@ -6,9 +6,10 @@
 <body>
 Hi WORLD this is the locations index!!!
 
-<p>checks to see if usertrue: <%=usertrue%></p>
+				<% for (var i = 0; i < location.reviews.length; i++) { %>
+					<p>These are location reviews: <%= location.reviews[i] %></p>
+				<% } %>
 
-					<% if (usertrue)  { %>
 						<p>add a new review</p>
 						<form action="/locations/<%= location.id %>/newreview" method="POST">
 							<input type="text" name="author" placeholder="name">
@@ -16,7 +17,7 @@ Hi WORLD this is the locations index!!!
 							<input type="text" name="comments" placeholder="comments">
 							<input type="submit">				
 						</form>
-					<% } %>
+
 
 
 

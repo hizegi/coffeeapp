@@ -21,42 +21,41 @@ router.get('/show', function(req, res){
 	res.render("locations/show.ejs")
 })
 
-router.get('/:id', function(req, res){
-	res.send("THis is the show page for the unique location")
+
+//this is for each individual locations
+router.get('/:id/review', function(req, res){
+		//find one specific location, based on the params.id
+		Locations.findById(req.params.id, function(err, location){
+		res.render("locations/show.ejs", {
+				location: location,
+			})
+	})
 })
 //==========================
 // CREATE
 //==========================
+
 router.post("/", function(req, res){
 
 	//search by zipcode (req.params this?) 
 	var zipcode = req.body.zipcode;
 
-	//searches donuts in zipcode
-	yelp.search({ term: 'donuts', location: zipcode })
+	//searches donuts in zipcode, limit 10 results
+	yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 		.then(function (data) {
 
 			//render a page
 		 	res.render("locations/index.ejs", {data: data});
-
-		 	//this the business's longitude and latitude BASED on id
-		 	for (var i = 0; i < data.businesses.length; i++ ) {
-		 		var businessId = data.businesses[i].id;
 		 	
-
-			 	yelp.business(businessId, function(err, business) {
-			 		// console.log(business);
-			 	})
-
-			 }//ends for loop
+				// trying to save these locations in DB??
+			 	// var newLocation = new Location({
+			 	// 	name: data.businesses[i].name,
+			 	// 	latitude: data.businesses[i].location.coordinate.latitude,
+			 	// 	longitude: data.businesses[i].location.coordinate.longitude
+			 	// })
 		 })
 })
 
-// router.get('/', function(req, res){
-// 	yelp.business('dough-new-york-2', function(err, data) {
-//  		 console.log(data);
-// 	})
-// })
 
 //this is for posting a new location on user ID
 router.post('/:id/newreview', function(req, res){
