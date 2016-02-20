@@ -67,11 +67,11 @@ app.get('/', function(req, res){
 
 var locationsController = require('./controllers/locations.js');
 var usersController     = require('./controllers/users.js');
-var reviewsController   = require('./controllers/reviews.js')
+// var reviewsController   = require('./controllers/reviews.js')
 
 app.use('/locations', locationsController);
 app.use('/users', usersController);
-app.use('/test', reviewsController)
+// app.use('/test', reviewsController)
 
 
 //========================

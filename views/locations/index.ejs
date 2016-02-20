@@ -3,15 +3,14 @@
 	<title>TESTING YELP</title>
 </head>
 <body>
-Hi WORLD this is the locations index!!!
+<h1>Hi WORLD this is the locations index!!!</h1>
 
+<h3>This is where you can see all the donuts in your zipcode</h3>
+<h3>And Read people's reviews about them!</h3>
 
-
-	<form action="/test/show" method="POST">
-		<input type="text" name="zipcode" placeholder="zipcode"><br>
-		<button>SUBMIT</button>
-	</form>
-
+	<% for (var i = 0; i < data.businesses.length; i++) { %>
+	Business <%= i %> is: <%= data.businesses[i].id %><br>
+	<% } %>
 
 
 </body>
