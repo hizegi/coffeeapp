@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var reviewSchema = require('../models/reviews.js').schema;
+var reviewSchema = require('./reviews.js').schema;
 
 var localSchema = new mongoose.Schema({
 	name: {type: String, required: true, unique: true},
@@ -12,4 +12,4 @@ var localSchema = new mongoose.Schema({
 var Local = mongoose.model('Local', localSchema);
 
 //exports
-module.exports.Local = Local;
+module.exports = Local;

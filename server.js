@@ -61,7 +61,7 @@ app.use(passport.session());
 //========================
 
 app.get('/', function(req, res){
-	res.send("HEYYYYY THE BEGINNING OF SOMETHING SPECIAL!")
+	res.redirect('/users')
 })
 
 var locationsController = require('./controllers/locations.js');
