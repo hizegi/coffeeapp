@@ -41,14 +41,14 @@ router.get('/:id', isLoggedIn, function(req, res) {
 
 	// console.log("/:id was accessed")
 	//find all locations
-	Local.find({}, function(err, local){
+	// Local.find({}, function(err, local){
 		//find one specific user, based on the params.id
 		User.findById(req.params.id, function(err, user){
 			res.render('users/show.ejs', {
 				user: user,
-				local: local
+				// local: local
 			})
-		})
+		// })
 	})
 });
 

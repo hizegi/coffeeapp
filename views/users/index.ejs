@@ -6,14 +6,25 @@
 	<h1>Hi WORLD this is the USERS INDEX!!!!</h1>
 
 	<!-- SHOWS only if user is LOGGED OUT -->
-	<!-- LOGIN Form -->
-	<h4>Sign up</h4>
+	<!-- SIGN iN Form -->
+	<h4>New Users: Sign up</h4>
 		<form action="/users" method="POST">
 			<input type="text" name="username" placeholder="username">
 			<input type="text" name="email" placeholder="email">
 			<input type="text" name="password" placeholder="password">
 			<input type="submit">
 		</form>
+
+	<!-- SHOWS only if user is LOGGED OUT -->
+	<!-- 	LOG IN FORM -->
+	<h4>Log In</h4>
+		<form action="/users/login" method="POST">
+			<input type="text" name="email" placeholder="e-mail address">
+			<input type="password" name="password" placeholder="password">
+			<button>Log In</button>
+		</form>
+
+
 
 	<h3>My Reviews</h3>
 
