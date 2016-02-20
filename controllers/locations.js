@@ -18,9 +18,10 @@ router.get('/show', function(req, res){
 	res.render("locations/show.ejs")
 })
 
-
+//==========================
+// CREATE
+//==========================
 router.post("/", function(req, res){
-
 
 	//search by zipcode (req.params this?) 
 	var zipcode = req.body.zipcode;
@@ -38,10 +39,7 @@ router.post("/", function(req, res){
 		 	
 
 			 	yelp.business(businessId, function(err, business) {
-			 		console.log("These are the businesses coordinates : ", business.location.coordinate.latitude, business.location.coordinate.longitude)
-			 			var latitude = business.location.coordinate.latitude;
-			 			var longitude = business.location.coordinate.longitude;
-
+			 		// console.log(business);
 			 	})
 
 			 }//ends for loop
@@ -154,9 +152,7 @@ router.post("/", function(req, res){
 
 
 
-//==========================
-// CREATE
-//==========================
+
 
 
 //==========================

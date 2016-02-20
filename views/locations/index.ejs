@@ -1,6 +1,9 @@
 <html>
 <head>
 	<title>TESTING YELP</title>
+	<script type="text/javascript" src="/js/locationsshow.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 </head>
 <body>
 <h1>Hi WORLD this is the locations index!!!</h1>
@@ -8,10 +11,13 @@
 <h3>This is where you can see all the donuts in your zipcode</h3>
 <h3>And Read people's reviews about them!</h3>
 
+
+<div id="map" style="height: 512px">
+
+
 	<% for (var i = 0; i < data.businesses.length; i++) { %>
 	Business <%= i %> is: <%= data.businesses[i].id %><br>
 	<% } %>
-
 
 </body>
 </html>

@@ -12,16 +12,28 @@ var passport = require("passport");
 //==========================
 // INDEX
 //==========================
-router.get('/', function(req, res){
+//index page: find all users
+router.get('/', function(req, res) {
+	//GIVES A BOOLEAN based on Login Status (isAuthenticated)
+	res.locals.login = req.isAuthenticated();
 	User.find({}, function(err, user){
+
 		res.render('users/index.ejs', {
 			user: user
 		})
 	})
-})
+});
 //==========================
 // SHOW
 //==========================
+
+//this is for logging out
+router.get('/logout', function(req, res){
+	req.logout();
+res.redirect('/users')
+})
+
+
 // this is for JSON to check all users
 router.get('/json', function(req, res){
 	User.find({}, function(err, users){
@@ -60,8 +72,8 @@ router.post('/', passport.authenticate('local-signup', {
     // successRedirect : '/users/json', // redirect to the secure profile section
     failureRedirect : '/users' }),// redirect back to the signup page if there is an error
 	function (req, res){
-		res.send("Hey Sign Up worked");
-		// res.redirect('/users/' + req.user.id)
+		// res.send("Hey Sign Up worked");
+		res.redirect('/users/' + req.user.id)
 	});
 
 //this is for LOG IN
