@@ -20,6 +20,7 @@
 		Shop number <%= i + 1 %>: <a href="/locations/<%= data.businesses[i].id %>/review"><%= data.businesses[i].name%></a><br>
 
 		<form action="/locations/show" method="POST">
+		 
 		  <input type="hidden" name="name" value="<%= data.businesses[i].name%>"><br>
 		  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>"><br>
 		  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>

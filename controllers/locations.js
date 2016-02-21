@@ -64,7 +64,9 @@ router.post('/show', function(req, res){
 			user[0].save(function(err){
 
 			//show show page
-			res.render("locations/show.ejs")
+			res.render("locations/show.ejs", {
+				user: user[0]
+				})
 			})
 		})
 	})

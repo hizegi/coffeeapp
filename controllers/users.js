@@ -5,7 +5,6 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/users.js");
 var Locations = require("../models/locations.js");
-var mongoose = require("mongoose");
 var passport = require("passport");
 
 

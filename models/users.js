@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
-var locationSchema = require('./locations').schema;
+var locationSchema = require('./locations.js').schema;
 var bcrypt = require('bcrypt-nodejs');
 
 ///STILL NEED TO REFERENCE LOCAL SCHEMA IN LINE 11
 
 var userSchema = mongoose.Schema({
-	username: {type: String, required: true},
-	email: {type: String, required: true, unique: true},
+	username: String,
+	email: String,
 	password: String,
 	locations: [locationSchema]
 });
@@ -26,7 +26,6 @@ userSchema.methods.validPassword = function(password) {
 };
 
 //create new class User
-
 var User = mongoose.model('User', userSchema);
 
 //exports

@@ -78,7 +78,7 @@ app.use('/users', usersController);
 // LISTENERS
 //========================
 
-mongoose.connect('mongodb://localhost/coffeeapp');
+mongoose.connect('mongodb://localhost/donutapp1');
 
 mongoose.connection.once('open', function(err, data){
     console.log("Mongoose is CONNECTED")
