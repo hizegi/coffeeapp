@@ -184,9 +184,12 @@ router.post('/:id/reviews', function(req, res){
 
 		// console.log("New Location was Saved");
 		//push this Location into user
-		user.locations.push(location);
-
-		user.save();
+		// user.locations.push(location);
+		User.update({_id: req.params.id},
+			{$addToSet: {locations: location}}, function(err, user){
+				console.log("USER LOCATION UPDATED: check mongo")
+			})
+		// user.save();
 		})
 	})//ends find UserById
 
@@ -213,7 +216,7 @@ router.post('/:id/reviews', function(req, res){
 		 	console.log("LOCATION UPDATED??? Check MONGO")
 
 				//Go back to users page
-				res.redirect("/users" + req.params.id)
+				res.redirect("/users/" + req.params.id)
 			});
 		})
 	})
