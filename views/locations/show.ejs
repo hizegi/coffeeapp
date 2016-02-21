@@ -9,7 +9,7 @@ Hi WORLD this is the locations index for <%= user.username %>!!!!!!
 This is the page just for One Article, the one you clicked on! 
 
 						<p>add a new review</p>
-						<form action="/locations/newreview" method="POST">
+						<form action="/users/<%=user.id%>/reviews" method="POST">
 							<input type="text" name="author" placeholder="name">
 							<input type="text" name="best" placeholder="best donut">
 							<input type="text" name="comments" placeholder="comments">

@@ -10,6 +10,7 @@ var localSchema = new mongoose.Schema({
 });
 
 //trying to by-pass empty reviews for saved locations
+//got this from stackOverflow
 localSchema.pre('save', function (next) {
             if (this.isNew) {
                 if (this.reviews.length == 0) {

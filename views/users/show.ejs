@@ -24,7 +24,7 @@ Hi WORLD this is the USER SHOW PAGE!! <p>Test to see if user is on: <%= usertrue
 		<% } %>
 	</ul>
 
-	<form action="/locations/json" method="POST">
+	<form action="/users/<%= user.id %>/locations/" method="POST">
 		<input type="text" name="zipcode" placeholder="zipcode"><br>
 		<button>SUBMIT</button>
 	</form>

@@ -4,8 +4,10 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users.js");
+var Review = require("../models/reviews.js");
 var Locations = require("../models/locations.js");
 var passport = require("passport");
+var yelp = require('../models/yelp.js');
 
 
 //==========================
@@ -34,7 +36,7 @@ res.redirect('/users')
 })
 
 
-// this is for JSON to check all users
+// this is for JSON to check all users (testing)
 router.get('/json', function(req, res){
 	User.find({}, function(err, users){
 		res.send(users)
@@ -47,6 +49,19 @@ router.get('/:id/json', function(req, res) {
 		res.send(user);
 	});
 });
+
+
+//this is for each user's reviews
+router.get('/:id/review', function(req, res){
+		//find one specific location, based on the params.id
+		// Locations.findById(req.params.id, function(err, location){
+		// res.render("locations/show.ejs", {
+		// 		location: location,
+		// 	})
+
+	res.send("This is the review page for this user")
+
+})
 
 //this is for show page ONLY IF logged in
 router.get('/:id', isLoggedIn, function(req, res) {
@@ -91,33 +106,119 @@ router.post('/login', passport.authenticate('local-login', {
 		res.redirect('/users/' + req.user.id)
 });
 
-//this is for posting a new location on user ID
-router.post('/:id/', function(req, res){
-	// console.log(req.params.id + " WAS ACCESSED")
-	// console.log("id: " + req.params.id)
+// //this is for posting a new location on user ID
+// router.post('/:id/', function(req, res){
+// 	// console.log(req.params.id + " WAS ACCESSED")
+// 	// console.log("id: " + req.params.id)
+// 	//find User by ID
+// 	User.findById(req.params.id, function(err, user){
+// 		// console.log(user.username + user.local + " WAS ACCESSED");
+// 		//find location by hidden id
+
+// 		var newLocation = new Locations(req.body);
+
+// 		user.locations.push(newLocation);
+// 		// console.log(user.local + " WAS ACCESSED");
+
+// 		newLocation.save(function(err, local){
+
+// 				user.save(function(err, user){
+
+
+// 				//redirect back to user show page
+// 				// res.redirect('users/' + req.params.id);
+// 				res.redirect('/users/' + req.params.id)
+// 			})
+
+// 		})
+// 	})
+// })
+
+//this is for search results based on user's zipcode entered
+// returns 10 results
+router.post("/:id/locations", function(req, res){
+
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
-		// console.log(user.username + user.local + " WAS ACCESSED");
-		//find location by hidden id
 
-		var newLocation = new Locations(req.body);
+	//search by zipcode (req.params this?) 
+	var zipcode = req.body.zipcode;
 
-		user.locations.push(newLocation);
-		// console.log(user.local + " WAS ACCESSED");
+	// searches donuts in zipcode, limit 10 results
+	yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
+		.then(function (data) {
 
-		newLocation.save(function(err, local){
-
-				user.save(function(err, user){
+			var data = data;
 
 
-				//redirect back to user show page
-				// res.redirect('users/' + req.params.id);
-				res.redirect('/users/' + req.params.id)
-			})
+			//render a page
+		 	res.render("locations/index.ejs", {
+		 		data: data,
+		 		user: user
+		 	});
+		 	// res.send(data);
 
-		})
+		 	return data
+
+		 })
 	})
 })
+
+// POST review: saves Review, Location, and User
+router.post('/:id/reviews', function(req, res){
+
+	//Find the logged in user
+	User.findById(req.params.id, function(err, user){
+
+		// console.log(user.locations);
+
+		var newLocation = new Locations({
+			nameid: req.body.nameid,
+			name: req.body.name,
+			latitude: req.body.latitude,
+			longitude: req.body.longitude,
+			reviews: []
+		})
+
+		// console.log(newLocation);
+		//push this Location into user
+		user.locations.push(newLocation);
+
+		//find location by nameid
+		Locations.find({nameid: req.body.nameid}, function(err, location){
+
+			var newReview = new Review({
+				best: req.body.best,
+				comments: req.body.comments
+			})
+
+			//push this Review into this location
+			location.reviews.push(newReview);
+
+			//save new Review
+			newReview.save(function(err, review){
+
+				//save this new location
+				newLocation.save(function(err, location){
+				console.log("IT SAVED??? Check mongo")
+
+					//save user
+					user.save(function(err, user){
+
+						//show show page
+						res.render("locations/show.ejs", {
+							user: user,
+							location: location,
+							review: review
+							})
+					})
+				})
+			})
+		})
+	})
+}); //ends post
+
+
 //==========================
 // DELETE
 //==========================
