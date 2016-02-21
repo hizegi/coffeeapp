@@ -50,6 +50,13 @@ router.get('/:id/json', function(req, res) {
 	});
 });
 
+// json for specific user, used ajax to display markers on map??
+router.get('/:id/locations', function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+		// res.render('users/locations.ejs');
+		res.send("Posting worked, able to router.get/:id/locations")
+	});
+});
 
 //this is for each user's reviews
 router.get('/:id/review', function(req, res){
@@ -148,18 +155,12 @@ router.post("/:id/locations", function(req, res){
 	yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 		.then(function (data) {
 
-			var data = data;
-
-
-			//render a page
-		 	res.render("locations/index.ejs", {
+			// res.send("Posting worked")
+			// render a page
+		 	res.render("users/locations.ejs", {
 		 		data: data,
 		 		user: user
 		 	});
-		 	// res.send(data);
-
-		 	return data
-
 		 })
 	})
 })
