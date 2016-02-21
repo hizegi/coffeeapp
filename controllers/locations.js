@@ -64,7 +64,7 @@ router.post('/:id/newreview', function(req, res){
 	// console.log(req.params.id + " WAS ACCESSED")
 	// console.log("id: " + req.params.id)
 	//find Location by id
-	Locations.findById(req.params.id, function(err, location){
+	Locations.findById(req.body.id, function(err, location){
 		// console.log("LOCATIONS WAS ACCESSED");
 		//create new article
 		var newReview = new Review(req.body);

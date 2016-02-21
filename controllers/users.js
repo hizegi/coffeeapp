@@ -50,7 +50,7 @@ router.get('/:id/json', function(req, res) {
 	});
 });
 
-// json for specific user, used ajax to display markers on map??
+// working on locations??
 router.get('/:id/locations', function(req, res) {
 	User.findById(req.params.id, function(err, user) {
 		// res.render('users/locations.ejs');
@@ -77,19 +77,15 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	//if true, then restrict what is shown on the show.ejs page
 	res.locals.usertrue = (req.user.id == req.params.id);
 
-	//another way to write that
-	// req.user.id == req.params.id ? res.locals.usertrue = true : res.locals.usertrue = false:
-
-	// console.log("/:id was accessed")
-	//find all locations
-	// Local.find({}, function(err, local){
+	//find reviews by author
+	Review.find({author: req.params.id}, function(err, review){
 		//find one specific user, based on the params.id
 		User.findById(req.params.id, function(err, user){
 			res.render('users/show.ejs', {
 				user: user,
-				// local: local
+				review: review
 			})
-		// })
+		})
 	})
 });
 
@@ -170,10 +166,11 @@ router.post('/:id/reviews', function(req, res){
 
 	//Find the logged in user
 	User.findById(req.params.id, function(err, user){
+		console.log("user found")
 
 		// console.log(user.locations);
 
-		var newLocation = new Locations({
+		var location = new Locations({
 			nameid: req.body.nameid,
 			name: req.body.name,
 			latitude: req.body.latitude,
@@ -181,42 +178,46 @@ router.post('/:id/reviews', function(req, res){
 			reviews: []
 		})
 
-		// console.log(newLocation);
+		//save the new location (the one clicked on by user)
+		location.save(function(err, location){
+			console.log("Location got saved? check database")
+
+		// console.log("New Location was Saved");
 		//push this Location into user
-		user.locations.push(newLocation);
+		user.locations.push(location);
+
+		user.save();
+		})
+	})//ends find UserById
 
 		//find location by nameid
-		Locations.find({nameid: req.body.nameid}, function(err, location){
+	Locations.find({nameid: req.body.nameid}, function(err, location){
 
-			var newReview = new Review({
-				best: req.body.best,
-				comments: req.body.comments
-			})
+		// console.log("Location found! It's name is: ", req.body.nameid)
+		// console.log("LOCATION EXISTS: name is: ", location)
 
-			//push this Review into this location
-			location.reviews.push(newReview);
+		var review = new Review({
+			best: req.body.best,
+			comments: req.body.comments,
+			author: req.params.id
+		})
 
-			//save new Review
-			newReview.save(function(err, review){
+		//save new Review
+		review.save(function(err, review){
+			console.log("***new review was saved***", review);
 
-				//save this new location
-				newLocation.save(function(err, location){
-				console.log("IT SAVED??? Check mongo")
+		//find the just save location, and now update it with the review just made
+		Locations.update({nameid: req.body.nameid},
+		 { $set : {reviews: review } },
+		 { multi: true }, function (err, response) {
+		 	console.log("LOCATION UPDATED??? Check MONGO")
 
-					//save user
-					user.save(function(err, user){
-
-						//show show page
-						res.render("locations/show.ejs", {
-							user: user,
-							location: location,
-							review: review
-							})
-					})
-				})
-			})
+				//Go back to users page
+				res.redirect("/users" + req.params.id)
+			});
 		})
 	})
+
 }); //ends post
 
 
