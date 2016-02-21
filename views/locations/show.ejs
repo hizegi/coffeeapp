@@ -6,12 +6,10 @@
 <body>
 Hi WORLD this is the locations index!!!
 
-				<% for (var i = 0; i < location.reviews.length; i++) { %>
-					<p>These are location reviews: <%= location.reviews[i] %></p>
-				<% } %>
+This is the page just for One Article, the one you clicked on! 
 
 						<p>add a new review</p>
-						<form action="/locations/<%= location.id %>/newreview" method="POST">
+						<form action="/locations/newreview" method="POST">
 							<input type="text" name="author" placeholder="name">
 							<input type="text" name="best" placeholder="best donut">
 							<input type="text" name="comments" placeholder="comments">

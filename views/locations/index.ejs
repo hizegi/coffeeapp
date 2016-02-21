@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>TESTING YELP</title>
-	<script type="text/javascript" src="/js/locationsshow.js"></script>
+	<script type="text/javascript" src="/js/locationsindex.js"></script>
 	<script type="text/javascript" src="src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
@@ -18,9 +18,18 @@
 
 	<% for (var i = 0; i < data.businesses.length; i++) { %>
 		Shop number <%= i + 1 %>: <a href="/locations/<%= data.businesses[i].id %>/review"><%= data.businesses[i].name%></a><br>
+
+		<form action="/locations/show" method="POST">
+		  <input type="hidden" name="name" value="<%= data.businesses[i].name%>"><br>
+		  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>"><br>
+		  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
+		  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
+		  <button>Review Me!</button>
+		</form>
 	<% } %>
 
-
+	<h3>Reviews!</h3>
+	<ul id="reviews"></ul>
 
 	<a href="/locations/show.ejs">Click here for show page</a>
 

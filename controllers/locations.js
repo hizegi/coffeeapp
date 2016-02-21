@@ -6,7 +6,7 @@ var express = require("express");
 var router = express.Router();
 var yelp = require('../models/yelp.js');
 var User = require("../models/users.js");
-var Locations = require("../models/locations.js");
+var Local = require("../models/locations.js");
 var Review = require("../models/reviews.js");
 
 
@@ -17,10 +17,13 @@ router.get('/', function(req, res){
 	res.render("locations/index.ejs");
 });
 
+router.get('/json', function(req, res){
+	res.redirect("locations/index.ejs")
+})
+
 router.get('/show', function(req, res){
 	res.render("locations/show.ejs")
 })
-
 
 //this is for each individual locations
 router.get('/:id/review', function(req, res){
@@ -35,26 +38,76 @@ router.get('/:id/review', function(req, res){
 // CREATE
 //==========================
 
-router.post("/", function(req, res){
+router.post('/show', function(req, res){
+
+	//For now FIND ALL USERS === specifify logged in user later
+	User.find({}, function(err, user){
+
+		console.log(user[0].locations);
+
+		var newLocation = new Local({
+			nameid: req.body.nameid,
+			name: req.body.name,
+			latitude: req.body.latitude,
+			longitude: req.body.longitude,
+			reviews: []
+		})
+
+		console.log(newLocation);
+		user[0].locations.push(newLocation);
+
+			//save this new location
+		newLocation.save(function(err, location){
+		console.log("IT SAVED??? Check mongo")
+
+			//save user
+			user[0].save(function(err){
+
+			//show show page
+			res.render("locations/show.ejs")
+			})
+		})
+	})
+})
+
+
+router.post("/json", function(req, res){
 
 	//search by zipcode (req.params this?) 
 	var zipcode = req.body.zipcode;
 
-	//searches donuts in zipcode, limit 10 results
+	// searches donuts in zipcode, limit 10 results
 	yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 		.then(function (data) {
 
+			var data = data;
+
+
 			//render a page
 		 	res.render("locations/index.ejs", {data: data});
-		 	
-				// trying to save these locations in DB??
-			 	// var newLocation = new Location({
-			 	// 	name: data.businesses[i].name,
-			 	// 	latitude: data.businesses[i].location.coordinate.latitude,
-			 	// 	longitude: data.businesses[i].location.coordinate.longitude
-			 	// })
+		 	// res.send(data);
+
+		 	return data
+
 		 })
 })
+
+
+				// // trying to save these locations in DB??
+				// for (var i = 0; i < data.businesses.length; i++) {
+
+				//  	var newLocation = new Location({
+				//  		name: data.businesses[i].name,
+				//  		latitude: data.businesses[i].location.coordinate.latitude,
+				//  		longitude: data.businesses[i].location.coordinate.longitude,
+				//  		reviews: []
+				//  	})
+
+				//  	newLocation.save(function (err){
+				//  		console.log("New locations saved???");
+				//  	})
+			 // 	}
+
 
 
 //this is for posting a new location on user ID
