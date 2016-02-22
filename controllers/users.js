@@ -266,6 +266,14 @@ router.delete('/:id', function(req, res){
 
 })
 
+// this deletes the specific review
+router.delete('/:id/deletereview', function(req, res){
+	console.log("DELETED REVIEW!")
+	Review.findByIdAndRemove(req.body.review_id, function(err, review){
+		res.redirect('/users/' + req.params.id)
+	})
+})
+
 //=====================
 // MIDDLEWARE ROUTE FUNCTION for .get('/:id', ISLOGGEDIN...)
 //=====================
