@@ -3,9 +3,8 @@
 	<title>TESTING YELP</title>
 </head>
 <body>
-Hi WORLD this is the USER SHOW PAGE!! <p>Test to see if user is on: <%= usertrue %></p>
 
-	<h2> This is <%= user.username %>'s Page!</h3>
+	<h2>Welcome back, <%= user.username %>!</h3>
 
 	<p>Here you can see all reviews posted by <%=user.username%></p>
 
@@ -18,7 +17,7 @@ Hi WORLD this is the USER SHOW PAGE!! <p>Test to see if user is on: <%= usertrue
 	<h3>User's Locations</h3>
 	<ul>
 		<% for (var i = 0; i < user.locations.length; i++) { %>
-		<li>Location <%= i+1 %>: <%= user.locations[i].name%></li>
+		<li>Location <%= i+1 %>: <a href="/locations/<%= user.locations[i].nameid %>"><%= user.locations[i].name%></a></li>
 		<% } %>
 	</ul>
 

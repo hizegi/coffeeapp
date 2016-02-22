@@ -18,23 +18,25 @@ router.get('/', function(req, res) {
 	//GIVES A BOOLEAN based on Login Status (isAuthenticated)
 	res.locals.login = req.isAuthenticated();
 	User.find({}, function(err, user){
-
-		res.render('users/index.ejs', {
-			user: user
+		Review.find({}, function(err, review){
+			res.render('users/index.ejs', {
+			user: user, 
+			review: review
+			})
 		})
 	})
 });
+
+
 //==========================
 // SHOW
 //==========================
 
 //this is for logging out
-//goes back to /users main page
 router.get('/logout', function(req, res){
 	req.logout();
 res.redirect('/users')
 })
-
 
 // this is for JSON to check all users (testing)
 router.get('/json', function(req, res){
@@ -50,13 +52,13 @@ router.get('/:id/json', function(req, res) {
 	});
 });
 
-// working on locations??
-router.get('/:id/locations', function(req, res) {
-	User.findById(req.params.id, function(err, user) {
-		// res.render('users/locations.ejs');
-		res.send("Posting worked, able to router.get/:id/locations")
-	});
-});
+// // working on locations??
+// router.get('/:id/locations', function(req, res) {
+// 	User.findById(req.params.id, function(err, user) {
+// 		// res.render('users/locations.ejs');
+// 		res.send("Posting worked, able to router.get/:id/locations")
+// 	});
+// });
 
 //this is for each user's reviews
 router.get('/:id/review', function(req, res){
@@ -77,10 +79,11 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	//if true, then restrict what is shown on the show.ejs page
 	res.locals.usertrue = (req.user.id == req.params.id);
 
-	//find reviews by author
-	Review.find({author: req.params.id}, function(err, review){
-		//find one specific user, based on the params.id
-		User.findById(req.params.id, function(err, user){
+	//find one specific user, based on the params.id
+	User.findById(req.params.id, function(err, user){
+		//find reviews by author
+		Review.find({author: user.username}, function(err, review){
+
 			res.render('users/show.ejs', {
 				user: user,
 				review: review
@@ -109,33 +112,6 @@ router.post('/login', passport.authenticate('local-login', {
 		res.redirect('/users/' + req.user.id)
 });
 
-// //this is for posting a new location on user ID
-// router.post('/:id/', function(req, res){
-// 	// console.log(req.params.id + " WAS ACCESSED")
-// 	// console.log("id: " + req.params.id)
-// 	//find User by ID
-// 	User.findById(req.params.id, function(err, user){
-// 		// console.log(user.username + user.local + " WAS ACCESSED");
-// 		//find location by hidden id
-
-// 		var newLocation = new Locations(req.body);
-
-// 		user.locations.push(newLocation);
-// 		// console.log(user.local + " WAS ACCESSED");
-
-// 		newLocation.save(function(err, local){
-
-// 				user.save(function(err, user){
-
-
-// 				//redirect back to user show page
-// 				// res.redirect('users/' + req.params.id);
-// 				res.redirect('/users/' + req.params.id)
-// 			})
-
-// 		})
-// 	})
-// })
 
 //this is for search results based on user's zipcode entered
 // returns 10 results
@@ -144,20 +120,20 @@ router.post("/:id/locations", function(req, res){
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
 
-	//search by zipcode (req.params this?) 
-	var zipcode = req.body.zipcode;
+		//search by zipcode (req.params this?) 
+		var zipcode = req.body.zipcode;
 
-	// searches donuts in zipcode, limit 10 results
-	yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
-		.then(function (data) {
+		// searches donuts in zipcode, limit 10 results
+		yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
+			.then(function (data) {
 
-			// res.send("Posting worked")
-			// render a page
-		 	res.render("users/locations.ejs", {
-		 		data: data,
-		 		user: user
-		 	});
-		 })
+				// res.send("Posting worked")
+				// render a page
+			 	res.render("users/locations.ejs", {
+			 		data: data,
+			 		user: user
+			 	});
+		})
 	})
 })
 
@@ -198,30 +174,37 @@ router.post('/:id/reviews', function(req, res){
 
 		// console.log("Location found! It's name is: ", req.body.nameid)
 		// console.log("LOCATION EXISTS: name is: ", location)
+		//find user Id for name
+		User.findById(req.params.id, function(err, user){
 
-		var review = new Review({
-			best: req.body.best,
-			comments: req.body.comments,
-			author: req.params.id
-		})
+			var review = new Review({
+				best: req.body.best,
+				comments: req.body.comments,
+				author: user.username
+			})
 
-		//save new Review
-		review.save(function(err, review){
-			console.log("***new review was saved***", review);
+			//save new Review
+			review.save(function(err, review){
+				console.log("***new review was saved***", review);
 
-		//find the just save location, and now update it with the review just made
-		Locations.update({nameid: req.body.nameid},
-		 { $set : {reviews: review } },
-		 { multi: true }, function (err, response) {
-		 	console.log("LOCATION UPDATED??? Check MONGO")
+			//find the just save location, and now update it with the review just made
+			Locations.update({nameid: req.body.nameid},
+			 { $set : {reviews: review } },
+			 { multi: true }, function (err, response) {
+			 	console.log("LOCATION UPDATED??? Check MONGO")
 
-				//Go back to users page
-				res.redirect("/users/" + req.params.id)
-			});
+					//Go back to users page
+					res.redirect("/users/" + req.params.id)
+				});
+			}) 
 		})
 	})
 
 }); //ends post
+
+//==========================
+// CREATE
+//==========================
 
 
 //==========================

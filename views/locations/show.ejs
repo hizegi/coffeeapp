@@ -4,17 +4,23 @@
 
 </head>
 <body>
-Hi WORLD this is the locations index for <%= user.username %>!!!!!!
+Hi WORLD this is the locations index for 
 
-This is the page just for One Article, the one you clicked on! 
+	<h1><%= location.name %>!!!!!!</h1>
 
-						<p>add a new review</p>
-						<form action="/users/<%=user.id%>/reviews" method="POST">
-							<input type="text" name="author" placeholder="name">
-							<input type="text" name="best" placeholder="best donut">
-							<input type="text" name="comments" placeholder="comments">
-							<input type="submit">				
-						</form>
+	<h3>Check out these reviews</h3>
+
+	<ul>
+		<% for (var i = 0; i < location.reviews.length; i++ ) { %>
+			
+
+	<li>Posted By: <%= location.reviews[i].author %> </li>
+	<li>Best: <%= location.reviews[i].best %> </li>
+	<li>Comments: <%= location.reviews[i].comments %> </li>
+
+
+	<%	} %>
+	</ul>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ var reviewSchema = new mongoose.Schema({
 	author: String,
 	best: String,
 	comments: String,
+	imgurl: String,
 	dateCreated: {type:Date, default:Date.now}
 });
 
