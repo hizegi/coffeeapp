@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //this is methodOverride for POST req
-// app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));
 
 //Thom's methodOverride func
 app.use(methodOverride(function(req, res){

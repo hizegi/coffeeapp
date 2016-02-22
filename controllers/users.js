@@ -62,14 +62,14 @@ router.get('/:id/json', function(req, res) {
 
 //this is for each user's reviews
 router.get('/:id/review', function(req, res){
-		//find one specific location, based on the params.id
-		// Locations.findById(req.params.id, function(err, location){
-		// res.render("locations/show.ejs", {
-		// 		location: location,
-		// 	})
-
-	res.send("This is the review page for this user")
-
+	User.findById(req.params.id, function(err, user){
+		Review.find({userid: req.params.id}, function(err, review){
+			res.render("./reviews/edit.ejs", {
+				user: user,
+				review: review[0]
+			})
+		})
+	})
 })
 
 //this is for show page ONLY IF logged in
@@ -203,8 +203,18 @@ router.post('/:id/reviews', function(req, res){
 
 }); //ends post
 
+
 //==========================
-// CREATE
+// UPDATE
+//==========================
+
+router.put('/:id/reviewedit', function(req, res){
+	res.redirect('/users/' + req.params.id);
+})
+
+
+//==========================
+// DELETE
 //==========================
 //this removes the user and All reviews associated
 router.delete('/:id', function(req, res){
@@ -222,12 +232,6 @@ router.delete('/:id', function(req, res){
 	})
 
 })
-
-
-//==========================
-// DELETE
-//==========================
-
 
 //=====================
 // MIDDLEWARE ROUTE FUNCTION for .get('/:id', ISLOGGEDIN...)

@@ -1,0 +1,17 @@
+<html>
+<head>
+	<title>REVIEWS!!!!</title>
+
+</head>
+<body>
+<h1>Hi WORLD this is the Reviews for <%= user.username %>!!!!!!</h1>
+	
+	<form action="/users/<%= user.id %>/reviewedit/" method="POST">
+	  <input type="text" name="best" value="<%= review.best%>"><br/>
+      <input type="text" name="imgurl" value="<%= review.imgurl%>"><br/>
+      <textarea name="comments" rows="8" cols="40"><%=review.comments%></textarea><br/>
+      <input type="hidden" name="_method" value="PUT" />
+      <button>Update!</button>
+    </form>
+</body>
+</html>

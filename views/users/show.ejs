@@ -25,6 +25,7 @@
 		<% for (var i = 0; i < review.length; i++) { %>
 		<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
 		<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
+		<a href="/users/<%= user.id %>/review">Edit Review</a>
 		<% } %>
 
 	</ul>
