@@ -27,16 +27,16 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //this is methodOverride for POST req
-app.use(methodOverride("_method"));
+// app.use(methodOverride("_method"));
 
 //Thom's methodOverride func
-// app.use(methodOverride(function(req, res){
-//   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-//     var method = req.body._method;
-//     delete req.body._method;
-//     return method;
-//   }
-// }));
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
 
 //use for passport
 app.use(session({ secret: 'woahwoahwoahthisisnotmybatmanglass' })); // session secret

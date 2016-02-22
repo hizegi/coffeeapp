@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var reviewSchema = new mongoose.Schema({
+	userid: String,
 	author: String,
 	best: String,
 	comments: String,

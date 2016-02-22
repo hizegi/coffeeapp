@@ -178,6 +178,7 @@ router.post('/:id/reviews', function(req, res){
 		User.findById(req.params.id, function(err, user){
 
 			var review = new Review({
+				userid: req.user.id,
 				best: req.body.best,
 				comments: req.body.comments,
 				author: user.username
@@ -205,6 +206,22 @@ router.post('/:id/reviews', function(req, res){
 //==========================
 // CREATE
 //==========================
+//this removes the user and All reviews associated
+router.delete('/:id', function(req, res){
+	console.log("DELETE ROUTE ACCESSED WOO");
+
+	//find review by userID
+	Review.remove({userid: req.user.id}, function(err, review){
+		console.log("Review Delete Accessed")
+
+		//find user and remove
+		User.findByIdAndRemove(req.params.id, function(err, user){
+			console.log("user has been deleted");
+			res.redirect('/users')
+		})
+	})
+
+})
 
 
 //==========================
