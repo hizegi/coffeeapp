@@ -207,9 +207,17 @@ router.post('/:id/reviews', function(req, res){
 //==========================
 // UPDATE
 //==========================
-
+//this is to update the review
 router.put('/:id/reviewedit', function(req, res){
+	Review.find({userid: req.params.id}, function(err, review){
+	//if user ID matches req.params.id, go ahead and make changes to review
+	if (req.user.id == req.params.id){
+			//then declare new value
+			review = req.body;
+			console.log(review)
+		}
 	res.redirect('/users/' + req.params.id);
+	})
 })
 
 
