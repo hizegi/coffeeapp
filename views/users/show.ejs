@@ -26,7 +26,11 @@
 		<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
 		<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
 			<% if (usertrue) { %> 
-			<a href="/users/<%= user.id %>/review">Edit Review</a>
+			
+			<form action="/users/<%= user.id %>/review" method="POST">
+				<input type="hidden" name="review_id" value="<%=review[i].id%>">
+				<button>Edit Review</button>
+			</form>
 			<% } %>
 		<% } %>
 

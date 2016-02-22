@@ -10,6 +10,7 @@
 	  <input type="text" name="best" value="<%= review.best%>"><br/>
       <input type="text" name="imgurl" value="<%= review.imgurl%>"><br/>
       <textarea name="comments" rows="8" cols="40"><%=review.comments%></textarea><br/>
+      <input type="hidden" name="review_id" value="<%= review.id %>">
       <input type="hidden" name="_method" value="PUT" />
       <button>Update!</button>
     </form>

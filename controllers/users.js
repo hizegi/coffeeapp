@@ -66,13 +66,14 @@ router.get('/:id/review', function(req, res){
 		Review.find({userid: req.params.id}, function(err, review){
 			res.render("./reviews/edit.ejs", {
 				user: user,
-				review: review[0]
+				review: review
 			})
 		})
 	})
 })
 
 //this is for show page ONLY IF logged in
+//shows reviews FOR this user id (by searching userid in reviews)
 router.get('/:id', isLoggedIn, function(req, res) {
 	//user persisted in session, created req.user
 	//sees if user logged in matches his own req.params.id page
@@ -204,13 +205,25 @@ router.post('/:id/reviews', function(req, res){
 
 }); //ends post
 
+//this is for the editing of user review
+router.post('/:id/review', function(req, res){
+	User.findById(req.params.id, function(err, user){
+		Review.findById(req.body.review_id, function(err, review){
+			res.render("./reviews/edit.ejs", {
+				user: user,
+				review: review
+			})
+		})
+	})
+})
 
 //==========================
 // UPDATE
 //==========================
 //this is to update the review
 router.put('/:id/reviewedit', function(req, res){
-	Review.find({userid: req.params.id}, function(err, review){
+	Review.findById(req.body.review_id, function(err, review){
+		console.log("The review was ")
 	//if user ID matches req.params.id, go ahead and make changes to review
 	if (req.user.id == req.params.id){
 			//then declare new value
