@@ -28,9 +28,13 @@ router.get('/show', function(req, res){
 router.get('/:id', function(req, res){
 	//find location based on req.params.id
 	Local.find({nameid: req.params.id}, function(err, location){
+		Review.find({nameid: req.params.id}, function(err, review){
+
 			// console.log(location.name);
 			res.render("locations/show.ejs", {
-				location: location[0]
+				location: location[0],
+				review: review
+			})
 		})
 	})
 })

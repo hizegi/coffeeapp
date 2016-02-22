@@ -13,12 +13,12 @@ Hi WORLD this is the locations index for
 	<h3>Check out these reviews</h3>
 
 	<ul>
-		<% for (var i = 0; i < location.reviews.length; i++ ) { %>
+		<% for (var i = 0; i < review.length; i++ ) { %>
 			
 
-	<li>Posted By: <%= location.reviews[i].author %></a> </li>
-	<li>Best: <%= location.reviews[i].best %> </li>
-	<li>Comments: <%= location.reviews[i].comments %> </li>
+	<li>Posted By: <a href="/users/<%= review[i].userid %>"> <%= review[i].author %></a> </li>
+	<li>Best: <%= review[i].best %> </li>
+	<li>Comments: <%= review[i].comments %> </li>
 
 
 	<%	} %>

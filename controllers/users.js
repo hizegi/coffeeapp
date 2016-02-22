@@ -82,7 +82,7 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	//find one specific user, based on the params.id
 	User.findById(req.params.id, function(err, user){
 		//find reviews by author
-		Review.find({author: user.username}, function(err, review){
+		Review.find({userid: req.user.id}, function(err, review){
 
 			res.render('users/show.ejs', {
 				user: user,
@@ -178,6 +178,7 @@ router.post('/:id/reviews', function(req, res){
 		User.findById(req.params.id, function(err, user){
 
 			var review = new Review({
+				nameid: req.body.nameid,
 				userid: req.user.id,
 				best: req.body.best,
 				comments: req.body.comments,
@@ -186,13 +187,13 @@ router.post('/:id/reviews', function(req, res){
 
 			//save new Review
 			review.save(function(err, review){
-				console.log("***new review was saved***", review);
+				console.log("***new review was saved user id is: ", review.userid);
 
 			//find the just save location, and now update it with the review just made
 			Locations.update({nameid: req.body.nameid},
-			 { $set : {reviews: review } },
-			 { multi: true }, function (err, response) {
-			 	console.log("LOCATION UPDATED??? Check MONGO")
+			 { $addToSet : {reviews: review } },
+			 function (err, response) {
+			 	console.log("LOCATION UPDATED??? Check MONGO for: ", response)
 
 					//Go back to users page
 					res.redirect("/users/" + req.params.id)

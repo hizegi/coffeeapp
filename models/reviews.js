@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var reviewSchema = new mongoose.Schema({
 	userid: String,
+	nameid: String,
 	author: String,
 	best: String,
 	comments: String,
