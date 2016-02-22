@@ -18,7 +18,8 @@
 
 		<form action="/users/<%= user.id %>/reviews" method="POST">
 			<input type="text" name="best" placeholder="The best item is.."></br>
-			<input type="text" name="comments" placeholder="Leave a short comment..">
+			<input type="text" name="comments" placeholder="Leave a short comment.."><br>
+			<input type="text" name="imgurl" placeholder="imgurl (ie. 'http://www.imgurl.com')">
 		 <!-- hidden tags to save business info to DB -->
 		  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
 		  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">

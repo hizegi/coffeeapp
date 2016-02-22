@@ -4,6 +4,8 @@
 
 </head>
 <body>
+
+	<a href="/users">Return Home</a>
 Hi WORLD this is the locations index for 
 
 	<h1><%= location.name %>!!!!!!</h1>
@@ -14,7 +16,7 @@ Hi WORLD this is the locations index for
 		<% for (var i = 0; i < location.reviews.length; i++ ) { %>
 			
 
-	<li>Posted By: <%= location.reviews[i].author %> </li>
+	<li>Posted By: <%= location.reviews[i].author %></a> </li>
 	<li>Best: <%= location.reviews[i].best %> </li>
 	<li>Comments: <%= location.reviews[i].comments %> </li>
 
