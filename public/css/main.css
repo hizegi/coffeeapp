@@ -1,0 +1,10 @@
+body {
+	background: papayawhip;
+}
+
+#map-canvas {
+	height: 400px; width: 700px;
+	display: inline-block;
+	margin-top: 5px;
+	border-radius: 15px;
+}

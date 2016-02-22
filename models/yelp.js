@@ -11,17 +11,4 @@ var yelp = new Yelp({
 });
 
 
-
-// yelp.search({ term: 'donuts', location: 'NYC' })
-// 		.then(function (data) {
-
-// 			search = data;
-// 			return search;
-// 		 	console.log("Yelp search is working");
-// 		})
-// 		.catch(function (err) {
-// 		  console.error("Yelp error", err);
-// 		});
-// var Yelp = mongoose.model('Yelp', yelp);
-
 module.exports = yelp;

@@ -1,7 +1,6 @@
 //=====================
 // REQUIREMENTS
 //=====================
-//this is the User schema
 var User = require('../models/users.js');
 var LocalStrategy   = require('passport-local').Strategy;
 var passport = require("passport");

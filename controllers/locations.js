@@ -12,13 +12,10 @@ var Review = require("../models/reviews.js");
 //==========================
 // INDEX
 //==========================
+//root directory redirects you back to user page
 router.get('/', function(req, res){
-	res.render("locations/index.ejs");
+	res.redirect("/users");
 });
-
-router.get('/json', function(req, res){
-	res.redirect("locations/index.ejs")
-})
 
 router.get('/show', function(req, res){
 	res.render("locations/show.ejs")
@@ -39,15 +36,12 @@ router.get('/:id', function(req, res){
 	})
 })
 
-// //this is for each individual locations
-// router.get('/:id/review', function(req, res){
-// 		//find one specific location, based on the params.id
-// 		Locations.findById(req.params.id, function(err, location){
-// 		res.render("locations/show.ejs", {
-// 				location: location,
-// 			})
-// 	})
-// })
+// JSON file for location (testing)
+router.get('/:id/json', function(req, res){
+	Local.find({nameid: req.params.id}, function(err, location){
+		res.send(location)
+	})
+})
 
 
  // YELP SEARCH RESULTS OBJECT for REFERENCE
@@ -71,13 +65,6 @@ router.get('/:id', function(req, res){
  //       id: 'key-and-cup-brooklyn',
  //       is_closed: false,
  //       location: [Object] } ] })
-
-
-
-
-
-
-
 
 //==========================
 // DELETE

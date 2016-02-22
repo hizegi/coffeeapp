@@ -1,7 +1,10 @@
 <html>
 <head>
 	<title>TESTING YELP</title>
-
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="../js/locationsshow.js"></script>
 </head>
 <body>
 
@@ -9,6 +12,8 @@
 Hi WORLD this is the locations index for 
 
 	<h1><%= location.name %>!!!!!!</h1>
+
+	<div id="map-canvas"></div>
 
 	<h3>Check out these reviews</h3>
 

@@ -13,7 +13,10 @@ var yelp = require('../models/yelp.js');
 //==========================
 // INDEX
 //==========================
-//index page: find all users
+//index page
+// + Finds all users
+// + Finds all reviews
+// + requires authentication for restricted access
 router.get('/', function(req, res) {
 	//GIVES A BOOLEAN based on Login Status (isAuthenticated)
 	res.locals.login = req.isAuthenticated();
@@ -51,14 +54,6 @@ router.get('/:id/json', function(req, res) {
 		res.send(user);
 	});
 });
-
-// // working on locations??
-// router.get('/:id/locations', function(req, res) {
-// 	User.findById(req.params.id, function(err, user) {
-// 		// res.render('users/locations.ejs');
-// 		res.send("Posting worked, able to router.get/:id/locations")
-// 	});
-// });
 
 //this is for each user's reviews
 router.get('/:id/review', function(req, res){
@@ -114,22 +109,21 @@ router.post('/login', passport.authenticate('local-login', {
 });
 
 
-//this is for search results based on user's zipcode entered
+//this is for search results based on user's input
 // returns 10 results
 router.post("/:id/locations", function(req, res){
 
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
 
-		//search by zipcode (req.params this?) 
+		//search by Yelp's Search API
+		// accepts zipcode, neighborhood, city
 		var zipcode = req.body.zipcode;
 
 		// searches donuts in zipcode, limit 10 results
 		yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 			.then(function (data) {
-
-				// res.send("Posting worked")
-				// render a page
+				
 			 	res.render("users/locations.ejs", {
 			 		data: data,
 			 		user: user

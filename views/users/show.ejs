@@ -4,12 +4,12 @@
 </head>
 <body>
 
-	<h2>Welcome back, <%= user.username %>!</h3>
+	<h2><%= user.username %>'s Profile!</h3>
 
 
-	<h3> SEARCH HERE BY ZIPCODE</h3>
+	<h3> SEARCH HERE</h3>
 	<form action="/users/<%= user.id %>/locations/" method="POST">
-		<input type="text" name="zipcode" placeholder="zipcode"><br>
+		<input type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city"><br>
 		<button>SUBMIT</button>
 	</form>
 
