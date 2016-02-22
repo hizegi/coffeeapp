@@ -222,15 +222,26 @@ router.post('/:id/review', function(req, res){
 //==========================
 //this is to update the review
 router.put('/:id/reviewedit', function(req, res){
+	// req.body.id = parseInt(req.params.id);
+
 	Review.findById(req.body.review_id, function(err, review){
-		console.log("The review was ")
+		console.log("The review was accessed ")
 	//if user ID matches req.params.id, go ahead and make changes to review
 	if (req.user.id == req.params.id){
+
+		// console.log("user is verified to post");
 			//then declare new value
-			review = req.body;
-			console.log(review)
+			review.best = req.body.best;
+			review.comments = req.body.comments;
+			review.imgurl = req.body.imgurl;
+
+			review.save(function(err){
+
+				console.log("The new stuff has been save?!!!")
+
+				res.redirect('/users/' + req.params.id);
+			})
 		}
-	res.redirect('/users/' + req.params.id);
 	})
 })
 
