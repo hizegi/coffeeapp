@@ -13,16 +13,12 @@
 		<button>SUBMIT</button>
 	</form>
 
-	<h3>User's Locations</h3>
-	<ul>
-		<% for (var i = 0; i < user.locations.length; i++) { %>
-		<li>Location <%= i+1 %>: <a href="/locations/<%= user.locations[i].nameid %>"><%= user.locations[i].name%></a></li>
-		<% } %>
-	</ul>
+
 
 	<h3>User's Reviews</h3>
 	<ul>
 		<% for (var i = 0; i < review.length; i++) { %>
+		<li><a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></li>
 		<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
 		<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
 			<% if (usertrue) { %> 

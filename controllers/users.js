@@ -88,6 +88,10 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	})
 });
 
+// router.get('/:id/locations/json', function(req, res){
+
+// 	res.send()
+// }
 //==========================
 // CREATE
 //==========================
@@ -123,11 +127,29 @@ router.post("/:id/locations", function(req, res){
 		// searches donuts in zipcode, limit 10 results
 		yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 			.then(function (data) {
-				
-			 	res.render("users/locations.ejs", {
-			 		data: data,
-			 		user: user
-			 	});
+
+				// for (var i = 0; i < data.businesses.length; i++) {
+
+				// 		var location = new Locations({
+				// 			nameid: data.businesses[i].id,
+				// 			name: data.businesses[i].name,
+				// 			latitude: data.businesses[i].location.coordinate.latitude,
+				// 			longitude: data.businesses[i].location.coordinate.longitude
+				// 		})
+
+
+						//IF LOCATION EXISTS, DO SOMETHING TO PREVENT DUPLICATES
+
+						// location.save(function(err){
+
+						 	res.render("users/locations.ejs", {
+						 		data: data,
+						 		user: user
+						 	});
+						// })
+
+				// }//ends for loop
+
 		})
 	})
 })
@@ -173,6 +195,7 @@ router.post('/:id/reviews', function(req, res){
 		User.findById(req.params.id, function(err, user){
 
 			var review = new Review({
+				name: req.body.name,
 				nameid: req.body.nameid,
 				userid: req.user.id,
 				best: req.body.best,
@@ -248,7 +271,7 @@ router.delete('/:id', function(req, res){
 	console.log("DELETE ROUTE ACCESSED WOO");
 
 	//find review by userID
-	Review.remove({userid: req.user.id}, function(err, review){
+	Review.remove({userid: req.params.id}, function(err, review){
 		console.log("Review Delete Accessed")
 
 		//find user and remove
