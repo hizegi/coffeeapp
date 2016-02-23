@@ -12,6 +12,7 @@ body {
 /*Navigation Bar   */
 /*******************/
 
+
 #header-div{
 	position: fixed;
 	top: 0;
@@ -68,6 +69,10 @@ section {
 	width: 80%;
 	background-color: papayawhip;
 	padding-bottom: 22px;
+	-webkit-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+	-moz-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+	box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+
 }
 
 section form {
@@ -79,6 +84,7 @@ section form {
 	width: 80%;
 	height: 30px;
 	max-width: 600px;
+
 }
 
 #submitbutton {
@@ -101,6 +107,7 @@ main {
 	margin: 0 auto;
 	width: 100%;
 	margin-bottom: 20px;
+
 }
 
 #review-img {
@@ -108,6 +115,9 @@ main {
 	width: 40%;
 	margin-left: 8%;
 	margin-bottom: 20px;
+/*webkit-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
+-moz-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
+box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);*/
 }
 
 #review-img img{
@@ -127,6 +137,9 @@ main {
 	max-width: 400px;
 	vertical-align:top;
 	overflow: hidden;
+/*webkit-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
+-moz-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
+box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);*/
 }
 
 #review-div ul {
@@ -136,6 +149,12 @@ main {
 ul {
 	list-style-type: none
 }
+
+
+.userform {
+	display: inline-block;
+}
+
 
 a:hover {
 	text-decoration: underline;
