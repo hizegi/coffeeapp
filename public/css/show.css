@@ -1,6 +1,6 @@
-body {
-	background-image: url("/images/donuts-main.jpg");
-	background-position: fixed;
+* {
+	padding: 0;
+	margin: 0;
 }
 
 /*******************/
@@ -12,7 +12,3 @@ body {
 	margin-top: 5px;
 	border-radius: 15px;
 }
-
-/*******************/
-/*Google Maps Stuff*/
-/*******************/
