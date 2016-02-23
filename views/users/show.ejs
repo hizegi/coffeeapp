@@ -28,45 +28,65 @@
 		<h3> SEARCH HERE</h3>
 		<form action="/users/<%= user.id %>/locations/" method="POST">
 			<input id="searchbar" type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city">
-			<input id="submitbutton" type="submit" value="SEARCH">
+			<input id="submitbutton" type="submit" value=" FIND ">
 		</form>
 
 	</section>
 
-		<h3>User's Reviews</h3>
-		<ul>
-			<% for (var i = 0; i < review.length; i++) { %>
-			<li><a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></li>
-			<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
-			<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
-				<% if (usertrue) { %> 
+	<main>
+
+		<h3><%=user.username%>'s Reviews</h3>
+
+		<!-- for every review, create new reviews container -->
+		<% for (var i = 0; i < review.length; i++) { %>
+
+		<div class="reviews-container">
+
+			<div id="review-img">
+				<a href="/locations/<%= user.locations[i].nameid %>">
+					<img src="http://placehold.it/350x200">
+				</a>
+			</div>
+
+
+			<div id="review-div">
+
+			<ul>
 				
-				<form action="/users/<%= user.id %>/review" method="POST">
-					<input type="hidden" name="review_id" value="<%=review[i].id%>">
-					<button>Edit Review</button>
-				</form>
+				<li><h2><a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></h2></li>
+				<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
+				<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
+					<% if (usertrue) { %> 
+					
+					<form action="/users/<%= user.id %>/review" method="POST">
+						<input type="hidden" name="review_id" value="<%=review[i].id%>">
+						<button>Edit Review</button>
+					</form>
 
-				<form action="/users/<%= user.id %>/deletereview" method="POST">
-					<input type="hidden" name="review_id" value="<%= review[i].id %>">
-					<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
+					<form action="/users/<%= user.id %>/deletereview" method="POST">
+						<input type="hidden" name="review_id" value="<%= review[i].id %>">
+						<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
+						<input type="hidden" name="_method" value="DELETE">
+						<button>Delete Review</button>
+					</form>
+					<% } %> 
+
+			
+
+			</ul>
+		</div>
+				<% } %>
+
+			<!-- DELETES USER and associated Reviews -->
+			<% if (usertrue) { %> 
+				<form action="/users/<%= user.id %>" method="POST">
 					<input type="hidden" name="_method" value="DELETE">
-					<button>Delete Review</button>
+					<button id="delete-button">Delete Self</button>
 				</form>
-				<% } %> 
+				<% } %>
 
-			<% } %>
 
-		</ul>
-
-		<a href="/users">Return Home</a>
-
-		<!-- DELETES USER and associated Reviews -->
-		<% if (usertrue) { %> 
-			<form action="/users/<%= user.id %>" method="POST">
-				<input type="hidden" name="_method" value="DELETE">
-				<button id="delete-button">Delete Self</button>
-			</form>
-			<% } %>
+		</div>
 	</main>
 
 </body>

@@ -70,7 +70,7 @@ section {
 	padding-bottom: 22px;
 }
 
-form {
+section form {
 	text-align: center;
 }
 
@@ -78,6 +78,7 @@ form {
 	margin: 0 auto;
 	width: 80%;
 	height: 30px;
+	max-width: 600px;
 }
 
 #submitbutton {
@@ -90,8 +91,54 @@ form {
 /* Review Section  */
 /*******************/
 
+main {
+	padding-top: 20px;
+	margin: 0 auto;
+	width: 80%;
+}
+
+.reviews-container{
+	margin: 0 auto;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#review-img {
+	display: inline-block;
+	width: 40%;
+	margin-left: 8%;
+	margin-bottom: 20px;
+}
+
+#review-img img{
+	display: inline-block;
+	width: 100%;
+	max-width: 350px;
+
+}
+
+#review-div{
+	box-sizing: border-box;
+	padding: 1em 3%;
+	background-color: papayawhip;
+	display: inline-block;
+	margin-left: 25px;
+	width: 40%;
+	max-width: 400px;
+	vertical-align:top;
+	overflow: hidden;
+}
+
+#review-div ul {
+	width: 100%;
+}
+
 ul {
 	list-style-type: none
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 
@@ -103,4 +150,27 @@ ul {
 	display: inline-block;
 	margin-top: 5px;
 	border-radius: 15px;
+}
+
+
+/*===================*/
+/* MEDIA QUERIES     */
+/*===================*/
+
+/*for devices 480px and smaller*/
+@media (max-width: 480px) {
+	main{
+		width: 100%;
+	}
+	#review-div{
+		padding: 0;
+		height: 100px;
+		font-size: 11px;
+	}
+	#home img {
+		display: none;
+	}
+	home {
+		float: none;
+	}
 }

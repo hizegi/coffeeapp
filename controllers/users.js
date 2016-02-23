@@ -117,6 +117,7 @@ router.post("/:id/locations", function(req, res){
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
 
+		//find locations
 		Locations.find({}, function(err, location){
 
 			//search by Yelp's Search API
