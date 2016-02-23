@@ -1,18 +1,37 @@
 body {
 	background-image: url("/images/donuts-main.jpg");
 	background-position: fixed;
+	color: white;
 }
 
-/*******************/
-/*Google Maps Stuff*/
-/*******************/
-#map-canvas {
-	height: 400px; width: 700px;
-	display: inline-block;
-	margin-top: 5px;
-	border-radius: 15px;
-}
+
 
 /*******************/
-/*Google Maps Stuff*/
+/*Nav Bar Stuff    */
 /*******************/
+nav {
+	width: 90%;
+}
+#nav-links {
+	width: 100%;
+	list-style-type: none;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-bottom: 2px solid white;
+	text-align: right;
+}
+
+#nav-links li {
+	display: inline;
+}
+
+input {
+	border-radius: 6px;
+	background-color: rgba(255, 255, 255, 0.7);
+
+	border: 1px solid #999;
+  height: 25px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
