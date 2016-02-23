@@ -128,31 +128,15 @@ router.post("/:id/locations", function(req, res){
 		yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 			.then(function (data) {
 
-				// for (var i = 0; i < data.businesses.length; i++) {
-
-				// 		var location = new Locations({
-				// 			nameid: data.businesses[i].id,
-				// 			name: data.businesses[i].name,
-				// 			latitude: data.businesses[i].location.coordinate.latitude,
-				// 			longitude: data.businesses[i].location.coordinate.longitude
-				// 		})
-
-
-						//IF LOCATION EXISTS, DO SOMETHING TO PREVENT DUPLICATES
-
-						// location.save(function(err){
-
 						 	res.render("users/locations.ejs", {
 						 		data: data,
 						 		user: user
 						 	});
-						// })
-
-				// }//ends for loop
-
 		})
 	})
 })
+
+
 
 // POST review: saves Review, Location, and User
 router.post('/:id/reviews', function(req, res){
@@ -184,7 +168,7 @@ router.post('/:id/reviews', function(req, res){
 				{$addToSet: {locations: location}}, function(err, user){
 					console.log("USER LOCATION UPDATED: check mongo")
 				})
-			// user.save();
+			user.save();
 			})
 
 		} else {//ends if statement
@@ -315,9 +299,14 @@ router.delete('/:id', function(req, res){
 
 // this deletes the specific review
 router.delete('/:id/deletereview', function(req, res){
-	console.log("DELETED REVIEW!")
+	// console.log("DELETED REVIEW!")
 	Review.findByIdAndRemove(req.body.review_id, function(err, review){
-		res.redirect('/users/' + req.params.id)
+		Locations.update({nameid: req.body.nameid}, 
+			{ $pull: { 'reviews': {userid: req.params.id }}},
+			function(err, location){
+				console.log("this is the location", location)
+				res.redirect('/users/' + req.params.id)
+		})
 	})
 })
 

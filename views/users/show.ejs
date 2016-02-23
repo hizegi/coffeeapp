@@ -30,6 +30,7 @@
 
 			<form action="/users/<%= user.id %>/deletereview" method="POST">
 				<input type="hidden" name="review_id" value="<%= review[i].id %>">
+				<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
 				<input type="hidden" name="_method" value="DELETE">
 				<button>Delete Review</button>
 			</form>
