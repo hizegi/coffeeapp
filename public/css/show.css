@@ -3,6 +3,70 @@
 	margin: 0;
 }
 
+body {
+	font-family: 'Karla', sans-serif;
+}
+
+
+/*******************/
+/*Navigation Bar   */
+/*******************/
+
+#header-div{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	display: inline-block;
+	background: white;
+	padding: 0.5em;
+	z-index: 1;
+	text-align: center;
+	height: 70px;
+	box-shadow: 4px 4px 15px 0px rgba(50, 50, 50, 0.2);
+	min-width: 480px;
+
+}
+
+#header-div h1 {
+	padding-top: 4px;
+	display: inline-block;
+}
+
+
+#home {
+	padding-right: 10%;
+	display: inline-block;
+	float: right;
+	width: 50px;
+}
+
+#home img {
+	margin-top: -46px;
+	padding-right: 10%;
+	display: inline-block;
+	width: 50px;
+}
+
+#home a:hover {
+	text-decoration: underline;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*******************/
+/* Main Section    */
+/*******************/
+
+main {
+	margin-top: 120px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	background-color: papayawhip;
+}
+
 /*******************/
 /*Google Maps Stuff*/
 /*******************/

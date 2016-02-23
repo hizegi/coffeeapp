@@ -1,53 +1,72 @@
 <html>
 <head>
-	<title>TESTING YELP</title>
+	<title>Donut Finder</title>
+	<link rel="stylesheet" type="text/css" href="../css/show.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="../js/text-slider.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 
-	<h2><%= user.username %>'s Profile!</h3>
+	<!-- Navigation/header bar -->
+	<nav  id="header-div">
+		<div>
+			<h1><%= user.username %></h1>
+			<h4>PROFILE</h4>
+		</div>
 
+		<div id="home">
+			<a href="/user"><img src="http://cdn.mysitemyway.com/icons-watermarks/flat-circle-white-on-black/bfa/bfa_shopping-cart/bfa_shopping-cart_flat-circle-white-on-black_512x512.png"><br>
+			MAIN</a><br>
+		</div>
+	</nav>
 
-	<h3> SEARCH HERE</h3>
-	<form action="/users/<%= user.id %>/locations/" method="POST">
-		<input type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city"><br>
-		<button>SUBMIT</button>
-	</form>
+	<main>
 
-
-
-	<h3>User's Reviews</h3>
-	<ul>
-		<% for (var i = 0; i < review.length; i++) { %>
-		<li><a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></li>
-		<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
-		<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
-			<% if (usertrue) { %> 
-			
-			<form action="/users/<%= user.id %>/review" method="POST">
-				<input type="hidden" name="review_id" value="<%=review[i].id%>">
-				<button>Edit Review</button>
-			</form>
-
-			<form action="/users/<%= user.id %>/deletereview" method="POST">
-				<input type="hidden" name="review_id" value="<%= review[i].id %>">
-				<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
-				<input type="hidden" name="_method" value="DELETE">
-				<button>Delete Review</button>
-			</form>
-			<% } %> 
-
-		<% } %>
-
-	</ul>
-
-	<a href="/users">Return Home</a>
-
-	<!-- DELETES USER and associated Reviews -->
-	<% if (usertrue) { %> 
-		<form action="/users/<%= user.id %>" method="POST">
-			<input type="hidden" name="_method" value="DELETE">
-			<button id="delete-button">Delete Self</button>
+		
+		<h3> SEARCH HERE</h3>
+		<form action="/users/<%= user.id %>/locations/" method="POST">
+			<input type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city"><br>
+			<button>SUBMIT</button>
 		</form>
-		<% } %>
+
+
+		<h3>User's Reviews</h3>
+		<ul>
+			<% for (var i = 0; i < review.length; i++) { %>
+			<li><a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></li>
+			<li>Favorite: <%= i+1 %>: <%= review[i].best%></li>
+			<li>Review: <%= i+1 %>: <%= review[i].comments%></li>
+				<% if (usertrue) { %> 
+				
+				<form action="/users/<%= user.id %>/review" method="POST">
+					<input type="hidden" name="review_id" value="<%=review[i].id%>">
+					<button>Edit Review</button>
+				</form>
+
+				<form action="/users/<%= user.id %>/deletereview" method="POST">
+					<input type="hidden" name="review_id" value="<%= review[i].id %>">
+					<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
+					<input type="hidden" name="_method" value="DELETE">
+					<button>Delete Review</button>
+				</form>
+				<% } %> 
+
+			<% } %>
+
+		</ul>
+
+		<a href="/users">Return Home</a>
+
+		<!-- DELETES USER and associated Reviews -->
+		<% if (usertrue) { %> 
+			<form action="/users/<%= user.id %>" method="POST">
+				<input type="hidden" name="_method" value="DELETE">
+				<button id="delete-button">Delete Self</button>
+			</form>
+			<% } %>
+	</main>
+
 </body>
 </html>

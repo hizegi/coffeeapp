@@ -5,8 +5,8 @@ $( document ).ready(function() {
 	//Index page slider config
 	$('.slide').textSlider({
 
-		timeout: 2000,
-		slideTime: 750,
+		timeout: 3000,
+		slideTime: 1000,
 		loop: 1
 
 	});
@@ -21,7 +21,7 @@ $( document ).ready(function() {
 		var settings = $.extend(
 			{
 				timeout: 2000,
-				slideTime: 750
+				slideTime: 2000
 			},
 			options 
 		);
