@@ -156,69 +156,99 @@ router.post("/:id/locations", function(req, res){
 
 // POST review: saves Review, Location, and User
 router.post('/:id/reviews', function(req, res){
+	// Check to see if Location exists in Location collections. 
+	//if query == req.location, redirect to location show
+	//else run below code
+	Locations.count({nameid: req.body.nameid}, function(err, location){
+		console.log("Location found: ", location)
 
-	//Find the logged in user
-	User.findById(req.params.id, function(err, user){
-		console.log("user found")
+		if(location == 1) {
+			console.log("location is found")
+			//Find the logged in user
+			User.findById(req.params.id, function(err, user){
+				console.log("user found")
 
-		// console.log(user.locations);
+				// console.log(user.locations);
 
-		var location = new Locations({
-			nameid: req.body.nameid,
-			name: req.body.name,
-			latitude: req.body.latitude,
-			longitude: req.body.longitude,
-			reviews: []
-		})
+				var location = new Locations({
+					nameid: req.body.nameid,
+					name: req.body.name,
+					latitude: req.body.latitude,
+					longitude: req.body.longitude,
+					reviews: []
+				})
 
-		//save the new location (the one clicked on by user)
-		location.save(function(err, location){
-			console.log("Location got saved? check database")
-
-		// console.log("New Location was Saved");
-		//push this Location into user
-		// user.locations.push(location);
-		User.update({_id: req.params.id},
-			{$addToSet: {locations: location}}, function(err, user){
-				console.log("USER LOCATION UPDATED: check mongo")
-			})
-		// user.save();
-		})
-	})//ends find UserById
-
-		//find location by nameid
-	Locations.find({nameid: req.body.nameid}, function(err, location){
-
-		// console.log("Location found! It's name is: ", req.body.nameid)
-		// console.log("LOCATION EXISTS: name is: ", location)
-		//find user Id for name
-		User.findById(req.params.id, function(err, user){
-
-			var review = new Review({
-				name: req.body.name,
-				nameid: req.body.nameid,
-				userid: req.user.id,
-				best: req.body.best,
-				comments: req.body.comments,
-				author: user.username
+				//push this Location into user
+				// user.locations.push(location);
+				User.update({_id: req.params.id},
+				{$addToSet: {locations: location}}, function(err, user){
+					console.log("USER LOCATION UPDATED: check mongo")
+				})
+			// user.save();
 			})
 
-			//save new Review
-			review.save(function(err, review){
-				console.log("***new review was saved user id is: ", review.userid);
+		} else {//ends if statement
+				console.log("location is not found")
+			//Find the logged in user
+			User.findById(req.params.id, function(err, user){
+				console.log("user found")
 
-			//find the just save location, and now update it with the review just made
-			Locations.update({nameid: req.body.nameid},
-			 { $addToSet : {reviews: review } },
-			 function (err, response) {
-			 	console.log("LOCATION UPDATED??? Check MONGO for: ", response)
+				// console.log(user.locations);
 
-					//Go back to users page
-					res.redirect("/users/" + req.params.id)
-				});
-			}) 
-		})
-	})
+				var location = new Locations({
+					nameid: req.body.nameid,
+					name: req.body.name,
+					latitude: req.body.latitude,
+					longitude: req.body.longitude,
+					reviews: []
+				})
+
+				//save the new location (the one clicked on by user)
+				location.save(function(err, location){
+					console.log("Location got saved? check database")
+
+				// console.log("New Location was Saved");
+				//push this Location into user
+				// user.locations.push(location);
+				User.update({_id: req.params.id},
+					{$addToSet: {locations: location}}, function(err, user){
+						console.log("USER LOCATION UPDATED: check mongo")
+					})
+				// user.save();
+				})
+			})//ends find UserById
+		}//ends else statement
+
+			console.log("Location found! It's name is: ", req.body.nameid)
+			console.log("LOCATION EXISTS: name is: ", location)
+			// find user Id for name
+			User.findById(req.params.id, function(err, user){
+
+				var review = new Review({
+					name: req.body.name,
+					nameid: req.body.nameid,
+					userid: req.user.id,
+					best: req.body.best,
+					comments: req.body.comments,
+					author: user.username
+				})
+
+				//save new Review
+				review.save(function(err, review){
+					console.log("***new review was saved user id is: ", review.userid);
+
+				//find the just save location, and now update it with the review just made
+				Locations.update({nameid: req.body.nameid},
+				 { $addToSet : {reviews: review } },
+				 function (err, response) {
+				 	console.log("LOCATION UPDATED??? Check MONGO for: ", response)
+
+						//Go back to users page
+						res.redirect("/users/" + req.params.id)
+					});
+				}) 
+			})
+	})//ends find by Location
 
 }); //ends post
 
