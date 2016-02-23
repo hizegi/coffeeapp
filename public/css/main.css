@@ -1,3 +1,9 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+
 body {
  	background:     linear-gradient(
 				      rgba(0, 0, 0, 0.5), 
@@ -16,33 +22,44 @@ body {
 /*Nav Bar Stuff    */
 /*******************/
 nav {
+	margin:0 auto;
 	width: 90%;
+	height: 70px;
+	padding-top: 1em;
+
 }
+
 #nav-links {
 	width: 100%;
 	list-style-type: none;
 	margin-left: 0px;
 	margin-right: 0px;
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid white;
 	text-align: right;
+	padding-bottom: 10px;
 }
 
 #nav-links li {
 	display: inline;
 }
 
+form {
+		  padding-bottom:13px;
+
+}
+
 input {
 	border-radius: 6px;
 	background-color: rgba(255, 255, 255, 0.7);
-
 	border: 1px solid #999;
-  height: 25px;
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+ 	height: 25px;
+	  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
+	margin-top: 180px;
     display: inline-block;
     padding-top: 0%;
     padding-bottom: 1.85625%;
@@ -51,4 +68,13 @@ h1 {
     padding-right: 1em;
     border-bottom: 1px solid white;
     font-size: 4.5em;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	text-decoration: underline;
 }

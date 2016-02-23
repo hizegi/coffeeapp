@@ -17,20 +17,21 @@
 		</div>
 
 		<div id="home">
-			<a href="/user"><img src="http://cdn.mysitemyway.com/icons-watermarks/flat-circle-white-on-black/bfa/bfa_shopping-cart/bfa_shopping-cart_flat-circle-white-on-black_512x512.png"><br>
+			<a href="/users"><img src="http://cdn.mysitemyway.com/icons-watermarks/flat-circle-white-on-black/bfa/bfa_shopping-cart/bfa_shopping-cart_flat-circle-white-on-black_512x512.png"><br>
 			MAIN</a><br>
 		</div>
 	</nav>
 
-	<main>
+	<section>
 
-		
+
 		<h3> SEARCH HERE</h3>
 		<form action="/users/<%= user.id %>/locations/" method="POST">
-			<input type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city"><br>
-			<button>SUBMIT</button>
+			<input id="searchbar" type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city">
+			<input id="submitbutton" type="submit" value="SEARCH">
 		</form>
 
+	</section>
 
 		<h3>User's Reviews</h3>
 		<ul>
