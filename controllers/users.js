@@ -88,10 +88,7 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	})
 });
 
-// router.get('/:id/locations/json', function(req, res){
 
-// 	res.send()
-// }
 //==========================
 // CREATE
 //==========================
@@ -120,20 +117,30 @@ router.post("/:id/locations", function(req, res){
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
 
-		//search by Yelp's Search API
-		// accepts zipcode, neighborhood, city
-		var zipcode = req.body.zipcode;
+		Locations.find({}, function(err, location){
 
-		// searches donuts in zipcode, limit 10 results
-		yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
-			.then(function (data) {
+			//search by Yelp's Search API
+			// accepts zipcode, neighborhood, city
+			var zipcode = req.body.zipcode;
 
-						 	res.render("users/locations.ejs", {
-						 		data: data,
-						 		user: user
-						 	});
-		})
-	})
+			// searches donuts in zipcode, limit 10 results
+			yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
+				.then(function (data) {
+
+				 	res.render("users/locations.ejs", {
+				 		data: data,
+				 		user: user,
+				 		location: location
+				 	}, function(err, html) {
+						if(err) {
+							res.redirect('/404'); // File doesn't exist
+						} else {
+						   res.send(html);
+							}
+					});
+			})//ends yelp search
+		});
+	})//ends User.findById
 })
 
 
@@ -298,7 +305,7 @@ router.delete('/:id', function(req, res){
 })
 
 
-// this deletes the specific review
+// Deletes the specific review AND location associated with the user
 router.delete('/:id/deletereview', function(req, res){
 	// console.log("DELETED REVIEW!")
 	Review.findByIdAndRemove(req.body.review_id, function(err, review){

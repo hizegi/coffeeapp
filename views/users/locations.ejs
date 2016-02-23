@@ -11,10 +11,16 @@
 
 
 	<% for (var i = 0; i < data.businesses.length; i++) { %>
+		<%for (var j = 0; j < location.length; j++) { %>
 		<img src="<%= data.businesses[i].image_url%>"/>
 
-		<a href="/locations/<%= data.businesses[i].id %>"><%= data.businesses[i].name%></a><br>
 
+		<!-- checks to see if location exists in local database -->
+		<% if (location[j].nameid == data.businesses[i].id) { %>
+			<a href="/locations/<%= data.businesses[i].id %>"><%= data.businesses[i].name%></a><br>
+		<%	} else { %>
+			<%= data.businesses[i].name %>
+		<% } %>
 
 		<form action="/users/<%= user.id %>/reviews" method="POST">
 			<input type="text" name="best" placeholder="The best item is.."></br>
@@ -27,6 +33,7 @@
 		  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
 		  <button>Post Review</button>
 		</form>
+	<% } %>
 	<% } %>
 
 	<h3>Reviews!</h3>
