@@ -297,15 +297,22 @@ router.delete('/:id', function(req, res){
 
 })
 
+
 // this deletes the specific review
 router.delete('/:id/deletereview', function(req, res){
 	// console.log("DELETED REVIEW!")
 	Review.findByIdAndRemove(req.body.review_id, function(err, review){
+		//find Locations collection, remove the review
 		Locations.update({nameid: req.body.nameid}, 
 			{ $pull: { 'reviews': {userid: req.params.id }}},
 			function(err, location){
-				console.log("this is the location", location)
-				res.redirect('/users/' + req.params.id)
+				//find the location in user and remove
+				User.update({_id: req.params.id}, 
+					{ $pull: { 'locations': {nameid: req.body.nameid}}},
+					function(err, user){
+						console.log("DELETED: ", user)
+						res.redirect('/users/' + req.params.id)
+				})
 		})
 	})
 })
