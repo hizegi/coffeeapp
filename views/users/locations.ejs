@@ -23,7 +23,7 @@
 			<%	} %>
 		<% } %>
 
-		<form action="/users/<%= user.id %>/reviews" method="POST">
+		<form name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
 			<input type="text" name="best" placeholder="The best item is.."></br>
 			<input type="text" name="comments" placeholder="Leave a short comment.."><br>
 			<input id="test" type="text" name="imgurl" placeholder="img url(http://www.img.url">
