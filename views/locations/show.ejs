@@ -4,7 +4,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/show.css">
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
- 	<script type="text/javascript" src="../js/locationsshow.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
 
 </head>
@@ -13,37 +12,39 @@
 	<!-- Navigation/header bar -->
 	<nav  id="header-div">
 		<div>
-
-			<h1><%= location.name %>!!!!!!</h1>
-		</div>
+			<h1><%= location.name %></h1>
+			<h4>REVIEWS</h4>
+		<div>
 
 		<div id="home">
-			<a href="/users"><img src="/images/donut3.png"><br>
-			MAIN</a><br>
+			<a href="javascript:history.back()"><img src="/images/donut3.png"><br>
+			RESULTS</a><br>
 		</div>
 	</nav>
 
+<main id="main-googlemaps">
 
-	<a href="javascript:history.back()">Go Back</a>
-Hi WORLD this is the locations index for 
+	<div id="google-parent-div">
+		<div id="map-canvas"></div>
+	</div><br><br>
 
-	<h1><%= location.name %>!!!!!!</h1>
-
-	<div id="map-canvas"></div>
-
-	<h3>Check out these reviews</h3>
-
-	<ul>
-		<% for (var i = 0; i < review.length; i++ ) { %>
-			
-
-	<li>Posted By: <a href="/users/<%= review[i].userid %>"> <%= review[i].author %></a> </li>
-	<li>Best: <%= review[i].best %> </li>
-	<li>Comments: <%= review[i].comments %> </li>
+	<h3>Check out these reviews: </h3><br>
 
 
-	<%	} %>
-	</ul>
+	<section id="locations-section">
+		<ul>
+			<% for (var i = 0; i < review.length; i++ ) { %>
+					
+				<li><%= review[i].dateCreated%></li>
+				<li><strong>Posted By:</strong> <a href="/users/<%= review[i].userid %>"> <%= review[i].author %></a> </li>
+				<li id="bestone"><strong>Best: </strong> <%= review[i].best %> </li>
+				<li><strong>Comments: </strong><%= review[i].comments %> </li>
+				<%	} %>
+		</ul>
+	</section>
 
+</main>
+
+	 	<script type="text/javascript" src="../js/locationsshow.js"></script>
 </body>
 </html>

@@ -78,6 +78,13 @@ section {
 
 }
 
+#locations-section{
+	margin-top: 0;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 section form {
 	text-align: center;
 }
@@ -109,7 +116,7 @@ main {
 	width: 80%;
 }
 
-#locations-main{
+#main-googlemaps, #locations-main{
 	padding-top: 120px;
 }
 
@@ -186,6 +193,7 @@ li {
 li:last-child{
 border-bottom: 1px solid black;
 }
+
 /*******************/
 /* Review Section: FORMS;  */
 /*******************/
@@ -245,11 +253,20 @@ textarea{
 /*******************/
 /*Google Maps Stuff*/
 /*******************/
+
+#google-parent-div{
+	text-align: center;
+}
+
 #map-canvas {
-	height: 400px; width: 700px;
+	height: 400px;
+	width: 500px;
 	display: inline-block;
-	margin-top: 5px;
 	border-radius: 15px;
+	margin: 0 auto;
+	-webkit-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+	-moz-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+	box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
 }
 
 #deletebutton {

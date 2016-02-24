@@ -1,5 +1,3 @@
-console.log("i work!");
-
 $(function() {
 
 
@@ -21,7 +19,7 @@ var initialize = function () {
 
 
 		var map = new google.maps.Map(document.getElementById('map-canvas'), {
-		  zoom: 14,
+		  zoom: 15,
 		  minZoom: 6,
 		  streetViewControl: false,
 		  mapTypeControl: false,
