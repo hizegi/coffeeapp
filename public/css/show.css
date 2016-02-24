@@ -5,6 +5,7 @@
 
 body {
 	font-family: 'Karla', sans-serif;
+	background-color: #FAF8FA;
 }
 
 
@@ -110,6 +111,12 @@ main {
 
 }
 
+#noreviews {
+	font-size: 1.5em;
+	text-align: center;
+	height: 600px;
+}
+
 #review-img {
 	display: inline-block;
 	width: 40%;
@@ -130,26 +137,31 @@ box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);*/
 #review-div{
 	box-sizing: border-box;
 	padding: 1em 3%;
-	background-color: papayawhip;
+	background-color: #FBDCA8;
 	display: inline-block;
 	margin-left: 25px;
 	width: 40%;
 	max-width: 400px;
 	vertical-align:top;
 	overflow: hidden;
-/*webkit-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
--moz-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);
-box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);*/
+	margin-bottom: 20px;
 }
 
 #review-div ul {
 	width: 100%;
 }
 
+#bestone{
+	 text-transform: uppercase;
+}
+
 ul {
 	list-style-type: none
 }
 
+li {
+	margin: 5px;
+}
 
 .userform {
 	display: inline-block;
@@ -171,6 +183,9 @@ a:hover {
 	border-radius: 15px;
 }
 
+#deletebutton {
+	text-align: center;
+}
 
 /*===================*/
 /* MEDIA QUERIES     */

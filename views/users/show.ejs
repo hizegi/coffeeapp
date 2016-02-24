@@ -37,7 +37,15 @@
 		<br>
 		<h3><%=user.username%>'s Reviews</h3><br><br>
 
+		<!-- checks for 0 reviews -->
+		<% if (review.length == 0) { %>
+
+				<div id="noreviews">You have no reviews. Start searching for those donuts above!</div>
+
+			<% } else { %>
+
 		<!-- for every review, create new reviews container -->
+
 		<% for (var i = 0; i < review.length; i++) { %>
 
 		<div class="reviews-container">
@@ -53,7 +61,7 @@
 
 			<ul>
 				
-				<li><h2><%= i+1 %>: <a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></h2></li>
+				<li><h2><%= i+1 %>. <a href="/locations/<%= user.locations[i].nameid %>"><%= review[i].name %></a></h2></li>
 				<li id="bestone"><strong>BEST:</strong> <%= review[i].best%></li>
 				<li><%= review[i].comments%></li>
 					<% if (usertrue) { %> 
@@ -71,15 +79,17 @@
 					</form>
 					<% } %> 
 
-			
+		
 
 			</ul>
 		</div><br>
 				<% } %>
 
+		<%	} %>
+
 			<!-- DELETES USER and associated Reviews -->
 			<% if (usertrue) { %> 
-				<form action="/users/<%= user.id %>" method="POST">
+				<form id="deletebutton" action="/users/<%= user.id %>" method="POST">
 					<input type="hidden" name="_method" value="DELETE">
 					<button id="delete-button">Delete Self</button>
 				</form>
