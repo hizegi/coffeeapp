@@ -52,7 +52,13 @@
 
 			<div class="review-img">
 				<a href="/locations/<%= user.locations[i].nameid %>">
+
+				<!-- set default image if none provided -->
+				<%	if (user.locations[i].imgurl == "" ) { %>
+					<img id="user-img" src="http://i127.photobucket.com/albums/p142/cy360/image-missing.jpg">
+				<% } else { %>
 					<img id="user-img" src="<%= user.locations[i].imgurl%>">
+				<% } %>
 				</a>
 			</div>
 
