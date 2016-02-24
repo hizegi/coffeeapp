@@ -49,7 +49,7 @@ var addMarkers = function(map) {
 			// for (var i=0; i < result.locations.length; i++) {
 				marker = new google.maps.Marker ({
 				    map: map,
-				    icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+				    // icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
 				    // position: { lat: result[i].latitude, lng: result[i].longitude },
 				    position: { lat: result[0].latitude, lng: result[0].longitude},
 				    title: result.name
