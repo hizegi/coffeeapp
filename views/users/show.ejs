@@ -3,7 +3,7 @@
 	<title>Donut Finder</title>
 	<link rel="stylesheet" type="text/css" href="../css/show.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script type="text/javascript" src="../js/text-slider.js"></script>
+	<script type="text/javascript" src="../js/usershow.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
 
 </head>
@@ -52,7 +52,7 @@
 
 			<div id="review-img">
 				<a href="/locations/<%= user.locations[i].nameid %>">
-					<img src="http://placehold.it/350x200">
+					<img src="<%= user.locations[i].imgurl%>">
 				</a>
 			</div>
 
@@ -68,14 +68,14 @@
 					
 					<form class="userform" action="/users/<%= user.id %>/review" method="POST">
 						<input type="hidden" name="review_id" value="<%=review[i].id%>">
-						<button>Edit Review</button>
+						<button>EDIT</button>
 					</form>
 
 					<form class="userform" action="/users/<%= user.id %>/deletereview" method="POST">
 						<input type="hidden" name="review_id" value="<%= review[i].id %>">
 						<input type="hidden" name="nameid" value="<%= review[i].nameid %>">
 						<input type="hidden" name="_method" value="DELETE">
-						<button>Delete Review</button>
+						<button>DELETE</button>
 					</form>
 					<% } %> 
 

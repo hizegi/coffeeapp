@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var reviewSchema = require('./reviews.js').schema;
 
 var localSchema = new mongoose.Schema({
+	imgurl: String,
 	nameid: String,
 	name: String,
 	latitude: Number,

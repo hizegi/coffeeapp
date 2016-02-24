@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>TESTING YELP</title>
-	<script type="text/javascript" src="/js/locationsindex.js"></script>
+	<script type="text/javascript" src="/js/userlocations.js"></script>
 	<script type="text/javascript" src="src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
@@ -26,7 +26,7 @@
 		<form action="/users/<%= user.id %>/reviews" method="POST">
 			<input type="text" name="best" placeholder="The best item is.."></br>
 			<input type="text" name="comments" placeholder="Leave a short comment.."><br>
-			<input type="text" name="imgurl" placeholder="imgurl (ie. 'http://www.imgurl.com')">
+			<input id="test" type="text" name="imgurl" placeholder="img url(http://www.img.url">
 		 <!-- hidden tags to save business info to DB -->
 		  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
 		  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">

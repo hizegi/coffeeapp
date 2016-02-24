@@ -153,6 +153,7 @@ box-shadow: -7px 6px 52px 2px rgba(153,147,153,1);*/
 
 #bestone{
 	 text-transform: uppercase;
+	 font-size: 1.2em;
 }
 
 ul {
@@ -163,13 +164,39 @@ li {
 	margin: 5px;
 }
 
+li:last-child{
+border-bottom: 1px solid black;
+}
+
 .userform {
 	display: inline-block;
 }
 
+a{
+	color: #673B3B;
+}
 
 a:hover {
 	text-decoration: underline;
+}
+
+.userform button {
+	font-weight: bold;
+	width: 93%;
+    border: none;
+    padding: 1px 15%;
+    text-align: center;
+    text-decoration: none;
+	background-color: #FBDCA8;
+    display: inline-block;
+    font-size: 11px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.userform button:hover{
+	background-color: white;
+	font-weight: normal;
 }
 
 

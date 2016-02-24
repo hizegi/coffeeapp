@@ -163,6 +163,7 @@ router.post('/:id/reviews', function(req, res){
 				// console.log(user.locations);
 
 				var location = new Locations({
+					imgurl: req.body.imgurl,
 					nameid: req.body.nameid,
 					name: req.body.name,
 					latitude: req.body.latitude,
@@ -188,6 +189,7 @@ router.post('/:id/reviews', function(req, res){
 				// console.log(user.locations);
 
 				var location = new Locations({
+					imgurl: req.body.imgurl,
 					nameid: req.body.nameid,
 					name: req.body.name,
 					latitude: req.body.latitude,
@@ -217,6 +219,7 @@ router.post('/:id/reviews', function(req, res){
 			User.findById(req.params.id, function(err, user){
 
 				var review = new Review({
+					imgurl: req.body.imgurl,
 					name: req.body.name,
 					nameid: req.body.nameid,
 					userid: req.user.id,
