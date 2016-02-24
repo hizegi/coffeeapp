@@ -31,12 +31,12 @@
 
 		<div class="reviews-container">
 
-			<div id="review-img">
+			<div class="review-img" id="review-img-results">
 					<img id="yelp-img" src="<%= data.businesses[i].image_url%>"/>
 			</div>
 	
 
-			<div id="review-div">
+			<div class="review-div" id="review-div-locations">
 
 			<h2><%= i+1 %>. <%= data.businesses[i].name %></h2>
 
@@ -44,20 +44,23 @@
 
 				<!-- checks to see if location exists in local database -->
 				<% if (location[j].nameid == data.businesses[i].id) { %>
-					<a href="/locations/<%= data.businesses[i].id %>">Check the reviews for <%= data.businesses[i].name%></a><br>
+					<a href="/locations/<%= data.businesses[i].id %>">Check out reviews for <%= data.businesses[i].name%></a><br>
 				<%	} %>
 			<% } %>
 
-			<form class="userform" name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
-				<input type="text" name="best" placeholder="The best item is.."></br>
-				<input type="text" name="comments" placeholder="Leave a short comment.."><br>
-				<input id="test" type="text" name="imgurl" placeholder="img url(http://www.img.url">
+			<form class="userform" id="userform-locations" name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
+				<strong>BEST:</strong><br>
+					<input type="text" name="best" placeholder="Your favorite item"></br>
+				<strong>REVIEW:</strong><br>
+					<textarea name="comments" rows="4" cols="30" placeholder="Like a mini donut, keep it sweet and simple."></textarea><br>
+				<strong>PHOTO URL: </strong><br>
+					<input id="test" type="text" name="imgurl" placeholder="http://www.img.url">
 			 <!-- hidden tags to save business info to DB -->
-			  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
-			  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">
-			  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.latitude%>"><br>
-			  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
-			  <button>POST REVIEW</button>
+				  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
+				  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">
+				  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.latitude%>"><br>
+				  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
+				  <button>POST REVIEW</button>
 			</form>
 
 			</div>
