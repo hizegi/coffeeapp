@@ -1,22 +1,43 @@
 <html>
 <head>
-	<title>REVIEWS!!!!</title>
-
+  <title>Donut Share: Edit Review</title>
+  <link rel="stylesheet" type="text/css" href="/css/show.css">
 </head>
 <body>
 
-<h1>Hi WORLD this is the Reviews for <%= user.username %>!!!!!!</h1>
+  <!-- Navigation/header bar -->
+  <nav  id="header-div">
+    <div>
+      <h1><%= user.username %></h1>
+      <h4>EDIT REVIEW</h4>
+    </div>
 
-	<a href="/users/<%=user.id%>">Return to your profile</a>
-	
-	<form action="/users/<%= user.id %>/reviewedit/" method="POST">
-	  <input type="text" name="best" value="<%= review.best%>"><br/>
-      <input type="text" name="imgurl" value="<%= review.imgurl%>"><br/>
-      <textarea name="comments" rows="8" cols="40"><%=review.comments%></textarea><br/>
+    <div id="home">
+      <a href="/users/<%=user.id%>"><img src="/images/donut3.png"><br>
+     PROFILE</a><br>
+    </div>
+  </nav>
 
-      <input type="hidden" name="review_id" value="<%= review.id %>">
-      <input type="hidden" name="_method" value="PUT" />
-      <button>Update!</button>
+  <!-- review section -->
+  <main id="main-googlemaps">
+    <section id="locations-section">
+
+	   <h2> You are editing your review for:</h2>
+     <h3><%= review.name %></h3>
+
+    	<form class="userform" id="edit-form" action="/users/<%= user.id %>/reviewedit/" method="POST">
+    	  <strong>BEST:</strong><br>
+          <input type="text" name="best" value="<%= review.best%>"><br/>
+        <strong>IMAGE URL:</strong><br>  
+          <input type="text" name="imgurl" value="<%= review.imgurl%>"><br/>
+        <strong>REVIEW:</strong><br> 
+          <textarea name="comments" rows="8" cols="40"><%=review.comments%></textarea><br/>
+
+          <input type="hidden" name="review_id" value="<%= review.id %>">
+          <input type="hidden" name="_method" value="PUT" />
+          <button>Update!</button>
+    </section>
     </form>
+  </main>
 </body>
 </html>

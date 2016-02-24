@@ -54,6 +54,9 @@ body {
 	text-decoration: underline;
 }
 
+#home a{
+	font-size: 0.8em;
+}
 
 a {
 	text-decoration: none;
@@ -194,9 +197,9 @@ li:last-child{
 border-bottom: 1px solid black;
 }
 
-/*******************/
+/***************************/
 /* Review Section: FORMS;  */
-/*******************/
+/***************************/
 .userform {
 	padding-top: 7px;
 	display: inline-block;
@@ -249,6 +252,13 @@ textarea{
 	font-weight: normal;
 }
 
+#edit-form{
+	margin: 0 auto;
+	display: block;
+	width: 50%;
+	max-width: 400px;
+	text-align: left;
+}
 
 /*******************/
 /*Google Maps Stuff*/
