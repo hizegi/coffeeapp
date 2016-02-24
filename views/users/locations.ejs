@@ -1,46 +1,75 @@
 <html>
 <head>
-	<title>TESTING YELP</title>
+	<title>Donut Share Search Results</title>
 	<script type="text/javascript" src="/js/userlocations.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/show.css">
 	<script type="text/javascript" src="src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
-<h2>Here are the results!</h2>
+
+		<!-- Navigation/header bar -->
+	<nav  id="header-div">
+		<div>
+			<h1><%= user.username %></h1>
+			<h4>SEARCH RESULTS</h4>
+		</div>
+
+		<div id="home">
+			<a href="/users/<%=user.id%>"><img src="/images/donut3.png"><br>
+			PROFILE</a><br>
+		</div>
+	</nav>
+
+<main id="locations-main">
+
+	<h2>Share your favorite donut!</h2><br><br>
 
 
 	<% for (var i = 0; i < data.businesses.length; i++) { %>
-		<img src="<%= data.businesses[i].image_url%>"/>
-		<%= data.businesses[i].name %>
-			<%for (var j = 0; j < location.length; j++) { %>
-		
 
+		<div class="reviews-container">
 
-			<!-- checks to see if location exists in local database -->
-			<% if (location[j].nameid == data.businesses[i].id) { %>
-				<a href="/locations/<%= data.businesses[i].id %>">Check the reviews for <%= data.businesses[i].name%></a><br>
-			<%	} %>
-		<% } %>
-
-		<form name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
-			<input type="text" name="best" placeholder="The best item is.."></br>
-			<input type="text" name="comments" placeholder="Leave a short comment.."><br>
-			<input id="test" type="text" name="imgurl" placeholder="img url(http://www.img.url">
-		 <!-- hidden tags to save business info to DB -->
-		  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
-		  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">
-		  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.latitude%>"><br>
-		  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
-		  <button>Post Review</button>
-		</form>
+			<div id="review-img">
+					<img id="yelp-img" src="<%= data.businesses[i].image_url%>"/>
+			</div>
 	
+
+			<div id="review-div">
+
+			<h2><%= i+1 %>. <%= data.businesses[i].name %></h2>
+
+				<%for (var j = 0; j < location.length; j++) { %>
+
+				<!-- checks to see if location exists in local database -->
+				<% if (location[j].nameid == data.businesses[i].id) { %>
+					<a href="/locations/<%= data.businesses[i].id %>">Check the reviews for <%= data.businesses[i].name%></a><br>
+				<%	} %>
+			<% } %>
+
+			<form class="userform" name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
+				<input type="text" name="best" placeholder="The best item is.."></br>
+				<input type="text" name="comments" placeholder="Leave a short comment.."><br>
+				<input id="test" type="text" name="imgurl" placeholder="img url(http://www.img.url">
+			 <!-- hidden tags to save business info to DB -->
+			  <input type="hidden" name="name" value="<%= data.businesses[i].name%>">
+			  <input type="hidden" name="nameid" value="<%= data.businesses[i].id%>">
+			  <input type="hidden" name="latitude" value="<%= data.businesses[i].location.coordinate.latitude%>"><br>
+			  <input type="hidden" name="longitude" value="<%= data.businesses[i].location.coordinate.longitude%>"><br>
+			  <button>POST REVIEW</button>
+			</form>
+
+			</div>
+		</div>
 	<% } %>
 
 	<h3>Reviews!</h3>
 	<ul id="reviews"></ul>
 
 	<a href="/locations/show.ejs">Click here for show page</a>
+
+</main>
 
 </body>
 </html>

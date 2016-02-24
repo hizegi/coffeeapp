@@ -1,12 +1,27 @@
 <html>
 <head>
-	<title>TESTING YELP</title>
-	<link rel="stylesheet" type="text/css" href="../css/show.css">
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<title>Donut Finder</title>
+	<link rel="stylesheet" type="text/css" href="../css/locationsshow.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script type="text/javascript" src="../js/locationsshow.js"></script>
+<!--  <script type="text/javascript" src="../js/locationsshow.js"></script> -->
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
+
+	<!-- Navigation/header bar -->
+	<nav  id="header-div">
+		<div>
+			<h1><%= user.username %></h1>
+			<h4>PROFILE</h4>
+		</div>
+
+		<div id="home">
+			<a href="/users"><img src="/images/donut3.png"><br>
+			MAIN</a><br>
+		</div>
+	</nav>
+
 
 	<a href="javascript:history.back()">Go Back</a>
 Hi WORLD this is the locations index for 
