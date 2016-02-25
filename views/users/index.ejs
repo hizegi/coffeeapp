@@ -5,6 +5,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script type="text/javascript" src="../js/text-slider.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
@@ -48,8 +49,8 @@
 		</ul>
 	</nav>
 
-	<h1 align="center">Donut Logo</h1>
-
+	<h1 align="center">Donut Press</h1>
+	<br><br>
 
 
 	<!-- This displays reviews -->
@@ -62,15 +63,10 @@
 	</div>
 		
 
-
-
-
-
-			<!-- SEE IF OTHER USERS SHOW -->
+			<!-- LIST OF USERS, HIDDEN in CSS, HOVER to SHOW-->
 				<div id="dataset-select-container">
-					<p id="users-title">Users</p>
 					<select id="dataset-select">
-						<option value=""/>-------</option>
+						<option value=""/> USERS</option>
 						<% for (var i=0; i < user.length; i ++) { %>
 							<option value="<%= user[i].id %>"><%= user[i].username %></option>
 						<% } %>
