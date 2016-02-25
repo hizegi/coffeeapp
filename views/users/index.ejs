@@ -66,9 +66,9 @@
 			<!-- LIST OF USERS, HIDDEN in CSS, HOVER to SHOW-->
 				<div id="dataset-select-container">
 					<select id="dataset-select">
-						<option value=""/> USERS</option>
+						<option value=""/>USERS</option>
 						<% for (var i=0; i < user.length; i ++) { %>
-							<option value="<%= user[i].id %>"><%= user[i].username %></option>
+							<option value="/users/<%= user[i].id %>"><%= user[i].username %></option>
 						<% } %>
 					</select>					
 				</div>
