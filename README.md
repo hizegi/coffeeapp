@@ -1,6 +1,6 @@
 ## Donut Press
 
-(frozen-earth-29251.herokuapp.com)
+frozen-earth-29251.herokuapp.com
 
 ### Description
 
