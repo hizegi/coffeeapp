@@ -24,12 +24,15 @@
 
 	<section>
 
+		<% if (usertrue) { %> 
 
 		<h3> SEARCH HERE</h3>
 		<form action="/users/<%= user.id %>/locations/" method="POST">
 			<input id="searchbar" type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city">
 			<input id="submitbutton" type="submit" value=" FIND ">
 		</form>
+
+		<% } %>
 
 	</section>
 

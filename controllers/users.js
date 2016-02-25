@@ -78,7 +78,7 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	//find one specific user, based on the params.id
 	User.findById(req.params.id, function(err, user){
 		//find reviews by author
-		Review.find({userid: req.user.id}, function(err, review){
+		Review.find({userid: req.params.id}, function(err, review){
 
 			res.render('users/show.ejs', {
 				user: user,

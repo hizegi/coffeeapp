@@ -15,11 +15,13 @@
 			<h1><%= user.username %></h1>
 			<h4>SEARCH RESULTS</h4>
 		</div>
-
-		<div id="home">
-			<a href="/users/<%=user.id%>"><img src="/images/donut3.png"><br>
-			PROFILE</a><br>
-		</div>
+ 
+		<% if (usertrue) { %>
+			<div id="home">
+				<a href="/users/<%=user.id%>"><img src="/images/donut3.png"><br>
+				PROFILE</a><br>
+			</div>
+		<% } %>
 	</nav>
 
 <main id="locations-main">
