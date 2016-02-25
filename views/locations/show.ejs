@@ -28,21 +28,18 @@
 		<div id="map-canvas"></div>
 	</div><br><br>
 
-	<h3>Check out these reviews: </h3><br>
+	<h3>Check out these sweet reviews: </h3><br><br>
 
-
-	<section id="locations-section">
-		<ul>
-			<% for (var i = 0; i < review.length; i++ ) { %>
-					
+	<% for (var i = 0; i < review.length; i++ ) { %>
+		<section id="locations-section">
+			<ul>		
 				<li><%= review[i].dateCreated%></li>
 				<li><strong>Posted By:</strong> <a href="/users/<%= review[i].userid %>"> <%= review[i].author %></a> </li>
 				<li id="bestone"><strong>Best: </strong> <%= review[i].best %> </li>
-				<li><strong>Comments: </strong><%= review[i].comments %> </li>
-				<%	} %>
-		</ul>
-	</section>
-
+				<li><strong>Comments: </strong><%= review[i].comments %> </li>		
+			</ul>
+		</section>
+	<%	} %>
 </main>
 
 	 	<script type="text/javascript" src="../js/locationsshow.js"></script>
