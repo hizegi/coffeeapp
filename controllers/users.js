@@ -78,7 +78,7 @@ router.get('/:id', isLoggedIn, function(req, res) {
 	//find one specific user, based on the params.id
 	User.findById(req.params.id, function(err, user){
 		//find reviews by author
-		Review.find({userid: req.params.id}, function(err, review){
+		Review.find({userid: req.user.id}, function(err, review){
 
 			res.render('users/show.ejs', {
 				user: user,
@@ -116,9 +116,10 @@ router.post("/:id/locations", function(req, res){
 
 	//find User by ID
 	User.findById(req.params.id, function(err, user){
-
+		console.log('1');
 		//find locations
 		Locations.find({}, function(err, location){
+			console.log('2')
 
 			//search by Yelp's Search API
 			// accepts zipcode, neighborhood, city
@@ -127,17 +128,17 @@ router.post("/:id/locations", function(req, res){
 			// searches donuts in zipcode, limit 10 results
 			yelp.search({ term: 'donuts', location: zipcode, limit: 10 })
 				.then(function (data) {
-
 				 	res.render("users/locations.ejs", {
 				 		data: data,
 				 		user: user,
 				 		location: location
 				 	}, function(err, html) {
 						if(err) {
+							console.log(err);
 							res.redirect('/404'); // File doesn't exist
 						} else {
 						   res.send(html);
-							}
+						}
 					});
 			})//ends yelp search
 		});
