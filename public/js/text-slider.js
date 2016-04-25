@@ -1,7 +1,5 @@
 $( document ).ready(function() {
 
-	console.log("I work");
-
 	//Index page slider config
 	$('.slide').textSlider({
 
