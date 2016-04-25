@@ -4,7 +4,8 @@
 }
 
 body {
-	font-family: 'Karla', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 	background-color: #FAF8FA;
 }
 
@@ -75,9 +76,9 @@ section {
 	width: 80%;
 	background-color: papayawhip;
 	padding-bottom: 22px;
-	-webkit-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
-	-moz-box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
-	box-shadow: -3px 3px 52px 2px rgba(153,147,153,1);
+	-webkit-box-shadow: -3px 3px 30px 2px rgba(153,147,153,1);
+	-moz-box-shadow: -3px 3px 30px 2px rgba(153,147,153,1);
+	box-shadow: -3px 3px 30px 2px rgba(153,147,153,1);
 
 }
 
@@ -122,6 +123,10 @@ main {
 
 #main-googlemaps, #locations-main{
 	padding-top: 120px;
+}
+
+#profile-blurb{
+	text-align: center;
 }
 
 .reviews-container{

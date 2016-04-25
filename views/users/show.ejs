@@ -26,7 +26,7 @@
 
 		<% if (usertrue) { %> 
 
-		<h3> SEARCH HERE</h3>
+		<h3> SEARCH FOR DONUT SHOPS:</h3>
 		<form action="/users/<%= user.id %>/locations/" method="POST">
 			<input id="searchbar" type="text" name="zipcode" placeholder="Search by: zipcode, neighborhood, or city">
 			<input id="submitbutton" type="submit" value=" FIND ">
@@ -38,7 +38,10 @@
 
 	<main>
 		<br>
-		<h3><%=user.username%>'s Reviews</h3><br><br>
+		<div id="profile-blurb">
+			<h3><%=user.username%>'s Reviews</h3><br>
+			<p>Click on the shop's name to view map and other reviews!</p><br><br>
+		</div>
 
 		<!-- checks for 0 reviews -->
 		<% if (review.length == 0) { %>
