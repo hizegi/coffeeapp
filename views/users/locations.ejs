@@ -47,6 +47,10 @@
 				<!-- checks to see if location exists in local database -->
 				<% if (location[j].nameid == data.businesses[i].id) { %>
 					<a href="/locations/<%= data.businesses[i].id %>">Check out reviews for <%= data.businesses[i].name%></a><br>
+
+					<% } else { %>
+
+					<p>There are no reviews yet. Be the first!</p>
 				<%	} %>
 			<% } %>
 
