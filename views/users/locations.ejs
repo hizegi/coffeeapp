@@ -48,11 +48,9 @@
 				<% if (location[j].nameid == data.businesses[i].id) { %>
 					<a href="/locations/<%= data.businesses[i].id %>">Check out reviews for <%= data.businesses[i].name%></a><br>
 
-					<% } else { %>
-
-					<p>There are no reviews yet. Be the first!</p>
-				<%	} %>
+					<% } %>
 			<% } %>
+
 
 			<form class="userform" id="userform-locations" name="newreview" action="/users/<%= user.id %>/reviews" method="POST" onsubmit="check()">
 				<strong>BEST:</strong><br>

@@ -242,12 +242,13 @@ textarea{
 
 .userform button {
 	font-weight: bold;
-	width: 93%;
     border: none;
-    padding: 1px 15%;
+    width: 100%;
+    padding: 5px 15%;
     text-align: center;
     text-decoration: none;
-	background-color: #FBDCA8;
+	background-color: rgb(230, 121, 121);
+	background-color: rgba(230, 121, 121, 0.38);
     display: inline-block;
     font-size: 11px;
     margin: 4px 2px;
